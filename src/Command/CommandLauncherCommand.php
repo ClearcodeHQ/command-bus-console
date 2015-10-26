@@ -29,13 +29,13 @@ class CommandLauncherCommand extends ContainerAwareCommand
         $arguments      = $input->getArgument('arguments');
 
         try {
-            $command = $commandLauncher->getCommandToLunch($commandToLunch, $arguments);
+            $command = $commandLauncher->getCommandToLaunch($commandToLunch, $arguments);
         } catch (CommandLauncherException $e) {
             $output->writeln($e->getMessage());
 
             return;
         }
 
-        $this->getContainer()->get('simple_bus.command_bus')->handle($command);
+        $this->getContainer()->get('command_bus')->handle($command);
     }
 }
