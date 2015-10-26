@@ -1,0 +1,29 @@
+{
+    "name": "clearcodehq/command-bus-launcher-bundle",
+    "type": "library",
+    "description": "Automaticly launch CommandBus commands",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ClearcodeHQ",
+            "homepage": "http://clearcode.cc/"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "simple-bus/symfony-bridge": "^4.1",
+        "clearcodehq/command-bus-launcher": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0",
+        "doctrine/orm": "~2.3",
+        "symfony/symfony": "~2.7",
+        "symfony/browser-kit": "~2.7"
+    },
+    "autoload": {
+        "psr-4" : { "ClearcodeHQ\\CommandBusLauncherBundle\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4" : { "tests\\" : "tests/" }
+    }
+}
