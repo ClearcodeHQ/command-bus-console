@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7e1eb7fc52baf6960ab215788b350dad",
+    "hash": "650c7b2c2c65a8f9b6d2bae779cf71ec",
     "content-hash": "f2912ce44973a657dd2a4c1aac63145a",
     "packages": [
         {
@@ -66,12 +66,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/JacekJagiello/command-bus-launcher.git",
-                "reference": "e84e98b6ad95cf9cdbe8020897180b24c1eae7ee"
+                "reference": "6eb511ca24af795542839da4e13a36adf25d88f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JacekJagiello/command-bus-launcher/zipball/e84e98b6ad95cf9cdbe8020897180b24c1eae7ee",
-                "reference": "e84e98b6ad95cf9cdbe8020897180b24c1eae7ee",
+                "url": "https://api.github.com/repos/JacekJagiello/command-bus-launcher/zipball/6eb511ca24af795542839da4e13a36adf25d88f1",
+                "reference": "6eb511ca24af795542839da4e13a36adf25d88f1",
                 "shasum": ""
             },
             "require": {
@@ -101,7 +101,7 @@
                 }
             ],
             "description": "Console command to run commands of command bus",
-            "time": "2015-10-20 13:12:10"
+            "time": "2015-10-26 16:10:16"
         },
         {
             "name": "doctrine/annotations",

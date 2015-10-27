@@ -24,6 +24,6 @@
         "psr-4" : { "ClearcodeHQ\\CommandBusLauncherBundle\\": "src/" }
     },
     "autoload-dev": {
-        "psr-4" : { "tests\\" : "tests/" }
+        "psr-4" : { "tests\\ClearcodeHQ\\CommandBusLauncherBundle\\" : "tests/" }
     }
 }

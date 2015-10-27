@@ -10,6 +10,9 @@ use ClearcodeHQ\CommandBusLauncher\CommandLauncherException;
 
 class CommandLauncherCommand extends ContainerAwareCommand
 {
+    const SUCCESS_CODE = 1;
+    const ERROR_CODE   = 0;
+
     protected function configure()
     {
         $this
@@ -33,9 +36,10 @@ class CommandLauncherCommand extends ContainerAwareCommand
         } catch (CommandLauncherException $e) {
             $output->writeln($e->getMessage());
 
-            return;
+            return self::ERROR_CODE;
         }
 
         $this->getContainer()->get('command_bus')->handle($command);
+        return self::SUCCESS_CODE;
     }
 }

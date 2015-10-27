@@ -1,9 +1,10 @@
 <?php
 
-namespace tests;
+namespace tests\ClearcodeHQ\CommandBusLauncherBundle\App;
 
+use ClearcodeHQ\CommandBusLauncherBundle\CommandBusLauncherBundle;
+use SimpleBus\SymfonyBridge\SimpleBusCommandBusBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
-use Symfony\Bundle\SecurityBundle\SecurityBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
@@ -14,8 +15,8 @@ class TestKernel extends Kernel
     {
         return array(
             new FrameworkBundle(),
-            new DoctrineBundle(),
-            new SecurityBundle(),
+            new SimpleBusCommandBusBundle(),
+            new CommandBusLauncherBundle()
         );
     }
 
@@ -35,5 +36,10 @@ class TestKernel extends Kernel
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load(__DIR__ . '/config.yml');
+    }
+
+    private function tmpDir()
+    {
+        return sys_get_temp_dir().'/clearcodehq_command_bus_launcher';
     }
 }
