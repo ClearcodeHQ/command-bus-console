@@ -6,10 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 abstract class CLITestCase extends WebTestCase
 {
+    /** @var int */
+    protected $statusCode;
+    /** @var string */
+    protected $display;
+
     /** {@inheritdoc} */
     public static function getKernelClass()
     {
@@ -27,26 +31,36 @@ abstract class CLITestCase extends WebTestCase
     /**
      * @param Command $command
      * @param array   $parameters
-     *
-     * @return int
      */
     protected function executeCommand(Command $command, $parameters = [])
     {
-        $application = new Application($this->kernel());
+        $application = new Application(static::$kernel);
         $application->add($command);
 
         $tester = new CommandTester($command);
         $tester->execute($parameters);
 
-        return $tester->getStatusCode();
+        $this->display = $tester->getDisplay();
+        $this->statusCode = $tester->getStatusCode();
     }
 
-    /**
-     * @return KernelInterface
-     */
-    private function kernel()
+    /** {@inheritdoc} */
+    protected function tearDown()
     {
-        return static::$kernel;
+        $this->display = null;
+        $this->statusCode = null;
+
+        parent::tearDown();
+    }
+
+    protected function assertThatStatusCodeEquals($statusCode)
+    {
+        $this->assertEquals($statusCode, $this->statusCode);
+    }
+
+    protected function assertThatOutputWasDisplayed()
+    {
+        $this->assertNotEmpty($this->display);
     }
 
     private function prepareKernel()

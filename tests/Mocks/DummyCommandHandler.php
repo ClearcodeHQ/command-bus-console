@@ -4,10 +4,15 @@ namespace tests\ClearcodeHQ\CommandBusLauncherBundle\Mocks;
 
 class DummyCommandHandler
 {
+    /**
+     * @param DummyCommand $command
+     *
+     * @throws \Exception
+     */
     public function handle(DummyCommand $command)
     {
-        $command->paramter1;
-
-        return;
+        if ($command->argument1 == DummyCommand::HANDLING_WITH_FAIL) {
+            throw new \Exception('An unexpected error occurred.');
+        }
     }
 }
