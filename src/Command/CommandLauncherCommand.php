@@ -11,7 +11,7 @@ use ClearcodeHQ\CommandBusLauncher\CommandLauncherException;
 class CommandLauncherCommand extends ContainerAwareCommand
 {
     const SUCCESS_CODE = 1;
-    const ERROR_CODE   = 0;
+    const ERROR_CODE = 0;
 
     protected function configure()
     {
@@ -29,7 +29,7 @@ class CommandLauncherCommand extends ContainerAwareCommand
         $commandLauncher = $this->getContainer()->get('command_bus_launcher.command_launcher');
 
         $commandToLunch = $input->getArgument('commandName');
-        $arguments      = $input->getArgument('arguments');
+        $arguments = $input->getArgument('arguments');
 
         try {
             $command = $commandLauncher->getCommandToLaunch($commandToLunch, $arguments);
@@ -40,6 +40,7 @@ class CommandLauncherCommand extends ContainerAwareCommand
         }
 
         $this->getContainer()->get('command_bus')->handle($command);
+
         return self::SUCCESS_CODE;
     }
 }

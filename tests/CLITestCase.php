@@ -5,8 +5,6 @@ namespace tests\ClearcodeHQ\CommandBusLauncherBundle;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\StringInput;
-use Symfony\Component\Console\Output\StreamOutput;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\HttpKernel\KernelInterface;
 
@@ -15,7 +13,7 @@ abstract class CLITestCase extends WebTestCase
     /** {@inheritdoc} */
     public static function getKernelClass()
     {
-        include_once __DIR__ . '/App/TestKernel.php';
+        include_once __DIR__.'/App/TestKernel.php';
 
         return 'tests\ClearcodeHQ\CommandBusLauncherBundle\App\TestKernel';
     }
@@ -28,7 +26,7 @@ abstract class CLITestCase extends WebTestCase
 
     /**
      * @param Command $command
-     * @param array $parameters
+     * @param array   $parameters
      *
      * @return int
      */
