@@ -23,13 +23,7 @@ abstract class CLITestCase extends WebTestCase
     /** {@inheritdoc} */
     protected function setUp()
     {
-        static::bootKernel();
-    }
-
-    /** {@inheritdoc} */
-    protected function tearDown()
-    {
-        parent::tearDown();
+        $this->prepareKernel();
     }
 
     /**
@@ -54,6 +48,16 @@ abstract class CLITestCase extends WebTestCase
      */
     private function kernel()
     {
-        return self::$kernel;
+        return static::$kernel;
+    }
+
+    private function prepareKernel()
+    {
+        if (null !== static::$kernel) {
+            static::$kernel->shutdown();
+        }
+
+        static::$kernel = static::createKernel();
+        static::$kernel->boot();
     }
 }
