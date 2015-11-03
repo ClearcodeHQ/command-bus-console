@@ -2,79 +2,74 @@
 
 namespace tests\ClearcodeHQ\CommandBusLauncherBundle;
 
-use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\StringInput;
-use Symfony\Component\Console\Output\StreamOutput;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 
 abstract class CLITestCase extends WebTestCase
 {
-    /** @var Client */
-    private $client;
-
-    /** @var ContainerInterface */
-    private $container;
+    /** @var int */
+    protected $statusCode;
+    /** @var string */
+    protected $display;
 
     /** {@inheritdoc} */
     public static function getKernelClass()
     {
-        include_once __DIR__ . '/App/TestKernel.php';
+        include_once __DIR__.'/App/TestKernel.php';
+
         return 'tests\ClearcodeHQ\CommandBusLauncherBundle\App\TestKernel';
     }
 
-    /**
-     * @return Client
-     */
-    protected function client()
-    {
-        return $this->client;
-    }
-
-    /**
-     * @return ContainerInterface
-     */
-    protected function container()
-    {
-        return $this->container;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     protected function setUp()
     {
-        parent::setUp();
-        $this->client    = $this->createClient();
-        $this->container = $this->client->getContainer();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function tearDown()
-    {
-        $this->container = null;
-        $this->client    = null;
-
-        parent::tearDown();
+        $this->prepareKernel();
     }
 
     /**
      * @param Command $command
-     * @param array $parameters
+     * @param array   $parameters
      */
     protected function executeCommand(Command $command, $parameters = [])
     {
-        $application = new Application($this->container()->get('kernel'));
+        $application = new Application(static::$kernel);
         $application->add($command);
 
         $tester = new CommandTester($command);
-
         $tester->execute($parameters);
-        return $tester->getStatusCode();
+
+        $this->display = $tester->getDisplay();
+        $this->statusCode = $tester->getStatusCode();
+    }
+
+    /** {@inheritdoc} */
+    protected function tearDown()
+    {
+        $this->display = null;
+        $this->statusCode = null;
+
+        parent::tearDown();
+    }
+
+    protected function assertThatStatusCodeEquals($statusCode)
+    {
+        $this->assertEquals($statusCode, $this->statusCode);
+    }
+
+    protected function assertThatOutputWasDisplayed()
+    {
+        $this->assertNotEmpty($this->display);
+    }
+
+    private function prepareKernel()
+    {
+        if (null !== static::$kernel) {
+            static::$kernel->shutdown();
+        }
+
+        static::$kernel = static::createKernel();
+        static::$kernel->boot();
     }
 }
