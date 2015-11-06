@@ -38,10 +38,9 @@ abstract class CLITestCase extends WebTestCase
         $application->add($command);
 
         $tester = new CommandTester($command);
-        $tester->execute($parameters);
+        $this->statusCode = $tester->execute($parameters);
 
         $this->display = $tester->getDisplay();
-        $this->statusCode = $tester->getStatusCode();
     }
 
     /** {@inheritdoc} */

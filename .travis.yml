@@ -21,10 +21,10 @@ matrix:
 
 before_install:
   - composer self-update
-  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/http-kernel:$SYMFONY_VERSION symfony/dependency-injection:$SYMFONY_VERSION symfony/framework-bundle:$SYMFONY_VERSION; fi
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/framework-bundle:$SYMFONY_VERSION  symfony/console:$SYMFONY_VERSION symfony/dependency-injection:$SYMFONY_VERSION symfony/http-kernel:$SYMFONY_VERSION symfony/config:$SYMFONY_VERSION; fi
 
 install:
   - composer update --prefer-dist
 
 script:
-- ./vendor/bin/phpunit --configuration phpunit.xml.dist --testsuite tests
+- vendor/bin/phpunit
