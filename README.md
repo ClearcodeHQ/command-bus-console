@@ -1,3 +1,3 @@
 # CommandBusLauncherBundle
 
-[![Build Status](https://travis-ci.org/Lucaszz/CommandBusLauncherBundle.svg?branch=improvements%2Ftests)](https://travis-ci.org/Lucaszz/CommandBusLauncherBundle)
+[![Build Status](https://travis-ci.org/ClearcodeHQ/CommandBusLauncherBundle.svg?branch=master)](https://travis-ci.org/ClearcodeHQ/CommandBusLauncherBundle)
