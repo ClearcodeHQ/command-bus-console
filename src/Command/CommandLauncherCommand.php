@@ -17,8 +17,7 @@ class CommandLauncherCommand extends ContainerAwareCommand
     {
         $this
             ->setName('command-bus:launch')
-            ->addArgument('commandName', InputArgument::REQUIRED)
-            ->addArgument('arguments', InputArgument::IS_ARRAY);
+            ->addArgument('commandName', InputArgument::REQUIRED);
     }
 
     /**
@@ -27,12 +26,31 @@ class CommandLauncherCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $commandLauncher = $this->getContainer()->get('command_bus_launcher.command_launcher');
+        $dialog = $this->getHelper('dialog');
 
-        $commandToLunch = $input->getArgument('commandName');
-        $arguments      = $input->getArgument('arguments');
+        $commandToLunch    = $input->getArgument('commandName');
+        $commandReflection = $commandLauncher->getCommandReflection($commandToLunch);
+
+        $parameters = [];
+
+        foreach ($commandReflection->parameters() as $parameter) {
+
+            $parameterType = null;
+            if ($parameter->getClass() !== null) {
+                $parameterType = $parameter->getClass()->name;
+            }
+
+            $question = $parameter->name.": ";
+
+            if($parameterType !== null) {
+                $question = sprintf("%s (%s): ", $parameter->name, $parameterType);
+            }
+
+            $parameters[] = $dialog->ask($output, $question, false);
+        }
 
         try {
-            $command = $commandLauncher->getCommandToLaunch($commandToLunch, $arguments);
+            $command = $commandLauncher->getCommandToLaunch($commandToLunch, $parameters);
         } catch (CommandLauncherException $e) {
             $output->writeln($e->getMessage());
 

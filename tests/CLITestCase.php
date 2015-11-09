@@ -2,6 +2,7 @@
 
 namespace tests\ClearcodeHQ\CommandBusLauncherBundle;
 
+use ClearcodeHQ\CommandBusLauncherBundle\Command\CommandLauncherCommand;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -64,17 +65,27 @@ abstract class CLITestCase extends WebTestCase
     }
 
     /**
-     * @param Command $command
-     * @param array $parameters
+     * @param $commandName
+     * @param array $arguments
      */
-    protected function executeCommand(Command $command, $parameters = [])
+    protected function executeCommand($commandName, $arguments = [])
     {
         $application = new Application($this->container()->get('kernel'));
+
+        $command = new CommandLauncherCommand();
         $application->add($command);
+        $commandTester = new CommandTester($command);
 
-        $tester = new CommandTester($command);
+        $dialog = $this->getMock('Symfony\Component\Console\Helper\DialogHelper', ['ask']);
 
-        $tester->execute($parameters);
-        return $tester->getStatusCode();
+        foreach ($arguments as $index => $argument) {
+            $dialog->expects($this->at($index))
+                ->method('ask')
+                ->willReturn($argument);
+        }
+
+        $command->getHelperSet()->set($dialog, 'dialog');
+
+        return $commandTester->execute(['commandName' => $commandName]);
     }
 }
