@@ -15,9 +15,9 @@ class CommandBusLaunchCommand extends ContainerAwareCommand
 
     protected function configure()
     {
-        //@todo add description
         $this
             ->setName('command-bus:launch')
+            ->setDescription('Command for launching commands registered in command-bus.')
             ->addArgument('commandName', InputArgument::REQUIRED)
             ->addArgument('arguments', InputArgument::IS_ARRAY);
     }
