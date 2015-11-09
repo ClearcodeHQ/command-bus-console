@@ -37,7 +37,7 @@ abstract class CLITestCase extends WebTestCase
         $application = new Application(static::$kernel);
         $application->add($command);
 
-        $tester = new CommandTester($command);
+        $tester           = new CommandTester($command);
         $this->statusCode = $tester->execute($parameters);
 
         $this->display = $tester->getDisplay();
@@ -46,7 +46,7 @@ abstract class CLITestCase extends WebTestCase
     /** {@inheritdoc} */
     protected function tearDown()
     {
-        $this->display = null;
+        $this->display    = null;
         $this->statusCode = null;
 
         parent::tearDown();

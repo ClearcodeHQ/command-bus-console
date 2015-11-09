@@ -5,7 +5,7 @@ namespace tests\ClearcodeHQ\CommandBusLauncherBundle\Mocks;
 class DummyCommand
 {
     const HANDLING_WITH_SUCCESS = 'HANDLING_WITH_SUCCESS';
-    const HANDLING_WITH_FAIL = 'HANDLING_WITH_FAIL';
+    const HANDLING_WITH_FAIL    = 'HANDLING_WITH_FAIL';
 
     /** @var string */
     public $argument1;

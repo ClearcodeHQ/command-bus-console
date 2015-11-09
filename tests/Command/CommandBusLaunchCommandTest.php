@@ -13,7 +13,7 @@ class CommandBusLaunchCommandTest extends CLITestCase
     {
         $this->executeCommand(new CommandBusLaunchCommand(), [
             'commandName' => 'DummyCommand',
-            'arguments' => [DummyCommand::HANDLING_WITH_SUCCESS],
+            'arguments'   => [DummyCommand::HANDLING_WITH_SUCCESS],
         ]);
 
         $this->assertThatStatusCodeEquals(CommandBusLaunchCommand::SUCCESS_CODE);
@@ -38,7 +38,7 @@ class CommandBusLaunchCommandTest extends CLITestCase
 
         $this->executeCommand(new CommandBusLaunchCommand(), [
             'commandName' => 'DummyCommand',
-            'arguments' => [],
+            'arguments'   => [],
         ]);
 
         $this->assertThatStatusCodeEquals(CommandBusLaunchCommand::ERROR_CODE);
@@ -50,7 +50,7 @@ class CommandBusLaunchCommandTest extends CLITestCase
     {
         $this->executeCommand(new CommandBusLaunchCommand(), [
             'commandName' => 'DummyCommand',
-            'arguments' => [DummyCommand::HANDLING_WITH_FAIL],
+            'arguments'   => [DummyCommand::HANDLING_WITH_FAIL],
         ]);
 
         $this->assertThatStatusCodeEquals(CommandBusLaunchCommand::ERROR_CODE);

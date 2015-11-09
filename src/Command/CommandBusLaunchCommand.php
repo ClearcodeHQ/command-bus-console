@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CommandBusLaunchCommand extends ContainerAwareCommand
 {
     const SUCCESS_CODE = 1;
-    const ERROR_CODE = 0;
+    const ERROR_CODE   = 0;
 
     protected function configure()
     {
@@ -28,7 +28,7 @@ class CommandBusLaunchCommand extends ContainerAwareCommand
         $commandLauncher = $this->getContainer()->get('command_bus_launcher.command_launcher');
 
         $commandToLunch = $input->getArgument('commandName');
-        $arguments = $input->getArgument('arguments');
+        $arguments      = $input->getArgument('arguments');
 
         try {
             $command = $commandLauncher->getCommandToLaunch($commandToLunch, $arguments);

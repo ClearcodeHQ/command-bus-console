@@ -13,11 +13,11 @@ class TestKernel extends Kernel
     /** {@inheritdoc} */
     public function registerBundles()
     {
-        return array(
+        return [
             new FrameworkBundle(),
             new SimpleBusCommandBusBundle(),
             new CommandBusLauncherBundle(),
-        );
+        ];
     }
 
     /** {@inheritdoc} */

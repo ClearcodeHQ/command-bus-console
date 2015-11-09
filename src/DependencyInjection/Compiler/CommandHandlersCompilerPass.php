@@ -13,7 +13,7 @@ class CommandHandlersCompilerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $commandHandlersTags = $container->findTaggedServiceIds('command_handler');
-        $commandCollector = $container->getDefinition('command_bus_launcher.command_collector');
+        $commandCollector    = $container->getDefinition('command_bus_launcher.command_collector');
 
         $commands = [];
 

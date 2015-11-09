@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CommandBusListCommand extends ContainerAwareCommand
 {
     const SUCCESS_CODE = 1;
-    const ERROR_CODE = 0;
+    const ERROR_CODE   = 0;
 
     protected function configure()
     {
