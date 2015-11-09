@@ -3,10 +3,10 @@ services:
         class: ClearcodeHQ\CommandBusLauncher\CommandCollector
 
     command_bus_launcher.value_conveters.uuid:
-         class: ClearcodeHQ\CommandBusLauncher\ValueConveter\UuidConveter
+        class: ClearcodeHQ\CommandBusLauncher\ValueConverter\UuidConverter
 
     command_bus_launcher.value_conveters.int:
-       class: ClearcodeHQ\CommandBusLauncher\ValueConveter\IntConveter
+        class: ClearcodeHQ\CommandBusLauncher\ValueConverter\IntConverter
 
     command_bus_launcher.arguments_processor:
         class: ClearcodeHQ\CommandBusLauncher\ArgumentsProcessor

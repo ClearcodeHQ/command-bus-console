@@ -10,8 +10,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CommandBusLaunchCommand extends ContainerAwareCommand
 {
-    const SUCCESS_CODE = 1;
-    const ERROR_CODE   = 0;
+    const SUCCESS_CODE = 0;
+    const ERROR_CODE   = 1;
 
     protected function configure()
     {

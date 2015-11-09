@@ -17,7 +17,7 @@ class CommandBusLaunchCommandTest extends CLITestCase
         ]);
 
         $this->assertThatStatusCodeEquals(CommandBusLaunchCommand::SUCCESS_CODE);
-        $this->assertThatOutputWasDisplayed();
+        $this->assertThatOutputContains('executed with success');
     }
 
     /** @test */
@@ -28,7 +28,7 @@ class CommandBusLaunchCommandTest extends CLITestCase
         ]);
 
         $this->assertThatStatusCodeEquals(CommandBusLaunchCommand::ERROR_CODE);
-        $this->assertThatOutputWasDisplayed();
+        $this->assertThatOutputContains("Command 'NonExistingCommand' does not exists");
     }
 
     /** @test */
@@ -42,7 +42,7 @@ class CommandBusLaunchCommandTest extends CLITestCase
         ]);
 
         $this->assertThatStatusCodeEquals(CommandBusLaunchCommand::ERROR_CODE);
-        $this->assertThatOutputWasDisplayed();
+        $this->assertThatOutputContains('An unexpected error occurred.');
     }
 
     /** @test */
@@ -54,6 +54,6 @@ class CommandBusLaunchCommandTest extends CLITestCase
         ]);
 
         $this->assertThatStatusCodeEquals(CommandBusLaunchCommand::ERROR_CODE);
-        $this->assertThatOutputWasDisplayed();
+        $this->assertThatOutputContains('An unexpected error occurred.');
     }
 }

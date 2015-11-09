@@ -57,9 +57,9 @@ abstract class CLITestCase extends WebTestCase
         $this->assertEquals($statusCode, $this->statusCode);
     }
 
-    protected function assertThatOutputWasDisplayed()
+    protected function assertThatOutputContains($string)
     {
-        $this->assertNotEmpty($this->display);
+        $this->assertContains($string, $this->display);
     }
 
     private function prepareKernel()
