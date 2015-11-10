@@ -20,9 +20,7 @@ class CommandLauncherTest extends \PHPUnit_Framework_TestCase
     /** @var ArgumentsProcessor */
     private $argumentsProcessor;
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_returns_command_with_integer_to_launch()
     {
         $this->commandCollector->getCommandByName('DummyCommand')->willReturn(
@@ -39,9 +37,7 @@ class CommandLauncherTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(123 === $command->argument2);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_returns_command_with_uuid_to_launch()
     {
         $this->commandCollector->getCommandByName('DummyCommandWithUuid')->willReturn(
@@ -58,9 +54,7 @@ class CommandLauncherTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Uuid::fromString('a1df6294-bcd9-43c5-8731-e3cd43401974')->equals($command->argument2));
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_returns_command_reflection()
     {
         $this->commandCollector->getCommandByName('DummyCommand')->willReturn(
@@ -72,11 +66,21 @@ class CommandLauncherTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(CommandReflection::class, $commandReflection);
     }
 
-    public function setUp()
+    /** {@inheritdoc} */
+    protected function setUp()
     {
         $this->commandCollector   = $this->prophesize(CommandCollector::class);
         $this->argumentsProcessor = $this->prophesize(ArgumentsProcessor::class);
 
         $this->sut = new CommandLauncher($this->commandCollector->reveal(), $this->argumentsProcessor->reveal());
+    }
+
+    /** {@inheritdoc} */
+    protected function tearDown()
+    {
+        $this->commandCollector   = null;
+        $this->argumentsProcessor = null;
+
+        $this->sut = null;
     }
 }

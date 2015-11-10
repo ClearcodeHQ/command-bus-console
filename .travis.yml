@@ -26,8 +26,7 @@ install:
   - composer update --prefer-dist
 
 script:
-  - vendor/bin/phpunit --testsuite unit
-  - vendor/bin/phpunit --testsuite command
+  - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 
 after_script:
   - vendor/bin/coveralls
