@@ -2,7 +2,7 @@
 
 namespace ClearcodeHQ\CommandBusLauncherBundle\Command;
 
-use ClearcodeHQ\CommandBusLauncher\CommandLauncherException;
+use ClearcodeHQ\CommandBusLauncherBundle\Launcher\CommandLauncherException;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

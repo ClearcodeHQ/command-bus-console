@@ -26,7 +26,8 @@ install:
   - composer update --prefer-dist
 
 script:
-  - vendor/bin/phpunit
+  - vendor/bin/phpunit --testsuite unit
+  - vendor/bin/phpunit --testsuite command
 
 after_script:
   - vendor/bin/coveralls
