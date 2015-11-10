@@ -4,13 +4,17 @@ namespace tests\ClearcodeHQ\CommandBusLauncherBundle\Mocks;
 
 class DummyCommand
 {
-    public $paramter1;
+    const HANDLING_WITH_SUCCESS = 'HANDLING_WITH_SUCCESS';
+    const HANDLING_WITH_FAIL    = 'HANDLING_WITH_FAIL';
+
+    /** @var string */
+    public $argument1;
 
     /**
-     * @param $paramter1
+     * @param $argument1
      */
-    public function __construct($paramter1)
+    public function __construct($argument1)
     {
-        $this->paramter1 = $paramter1;
+        $this->argument1 = $argument1;
     }
 }

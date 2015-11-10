@@ -13,29 +13,29 @@ class TestKernel extends Kernel
     /** {@inheritdoc} */
     public function registerBundles()
     {
-        return array(
+        return [
             new FrameworkBundle(),
             new SimpleBusCommandBusBundle(),
-            new CommandBusLauncherBundle()
-        );
+            new CommandBusLauncherBundle(),
+        ];
     }
 
     /** {@inheritdoc} */
     public function getCacheDir()
     {
-        return $this->tmpDir() . '/cache';
+        return $this->tmpDir().'/cache';
     }
 
     /** {@inheritdoc} */
     public function getLogDir()
     {
-        return $this->tmpDir() . '/logs';
+        return $this->tmpDir().'/logs';
     }
 
     /** {@inheritdoc} */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(__DIR__ . '/config.yml');
+        $loader->load(__DIR__.'/config.yml');
     }
 
     private function tmpDir()
