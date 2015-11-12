@@ -1,0 +1,20 @@
+services:
+    command_bus_launcher.command_collector:
+        class: ClearcodeHQ\CommandBusLauncher\CommandCollector
+
+    command_bus_launcher.value_conveters.uuid:
+        class: ClearcodeHQ\CommandBusLauncher\ValueConverter\UuidConverter
+
+    command_bus_launcher.value_conveters.int:
+        class: ClearcodeHQ\CommandBusLauncher\ValueConverter\IntConverter
+
+    command_bus_launcher.arguments_processor:
+        class: ClearcodeHQ\CommandBusLauncher\ArgumentsProcessor
+        arguments:
+            - [@command_bus_launcher.value_conveters.uuid, @command_bus_launcher.value_conveters.int]
+
+    command_bus_launcher.command_launcher:
+        class: ClearcodeHQ\CommandBusLauncher\CommandLauncher
+        arguments:
+            - @command_bus_launcher.command_collector
+            - @command_bus_launcher.arguments_processor

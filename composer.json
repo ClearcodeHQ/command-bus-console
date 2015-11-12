@@ -24,9 +24,9 @@
         "satooshi/php-coveralls": "^0.6.1"
     },
     "autoload": {
-        "psr-4" : { "ClearcodeHQ\\CommandBusLauncherBundle\\": "src" }
+        "psr-4" : { "ClearcodeHQ\\": "src" }
     },
     "autoload-dev": {
-        "psr-4" : { "tests\\ClearcodeHQ\\CommandBusLauncherBundle\\" : "tests" }
+        "psr-4" : { "tests\\ClearcodeHQ\\" : "tests" }
     }
 }
