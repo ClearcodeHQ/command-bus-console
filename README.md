@@ -11,7 +11,7 @@ Command Bus Console is a package exposing your command bus functionality to the 
 $ composer require clearcode/command-bus-console
 ```
 
-Enable `Clearcode\CommandBusConsole\Bundle\CommandBusConsoleBundle\CommandBusConsoleBundle` in the kernel of your Symfony application.
+Enable `Clearcode\CommandBusConsole\Bundle\CommandBusConsoleBundle` in the kernel of your Symfony application.
 
 ```php
     <?php
@@ -21,7 +21,7 @@ Enable `Clearcode\CommandBusConsole\Bundle\CommandBusConsoleBundle\CommandBusCon
     {
         $bundles = array(
             // ...
-            new Clearcode\CommandBusConsole\Bundle\CommandBusConsoleBundle\CommandBusConsoleBundle(),
+            new Clearcode\CommandBusConsole\Bundle\CommandBusConsoleBundle(),
         );
     }
 ```

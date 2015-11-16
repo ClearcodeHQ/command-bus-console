@@ -1,8 +1,8 @@
 <?php
 
-namespace Clearcode\CommandBusConsole\Bundle\CommandBusConsoleBundle;
+namespace Clearcode\CommandBusConsole\Bundle;
 
-use Clearcode\CommandBusConsole\Bundle\CommandBusConsoleBundle\DependencyInjection\Compiler\CommandHandlersCompilerPass;
+use Clearcode\CommandBusConsole\Bundle\DependencyInjection\Compiler\CommandHandlersCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

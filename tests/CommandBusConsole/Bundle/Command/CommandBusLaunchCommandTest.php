@@ -1,10 +1,10 @@
 <?php
 
-namespace tests\Clearcode\CommandBusConsole\Bundle\CommandBusConsoleBundle\Command;
+namespace tests\Clearcode\CommandBusConsole\Bundle\Command;
 
-use Clearcode\CommandBusConsole\Bundle\CommandBusConsoleBundle\Command\CommandBusConsoleCommand;
-use tests\Clearcode\CommandBusConsole\Bundle\CommandBusConsoleBundle\CLITestCase;
-use tests\Clearcode\CommandBusConsole\Bundle\CommandBusConsoleBundle\Mocks\DummyCommand;
+use Clearcode\CommandBusConsole\Bundle\Command\CommandBusConsoleCommand;
+use tests\Clearcode\CommandBusConsole\Bundle\CLITestCase;
+use tests\Clearcode\CommandBusConsole\Bundle\Mocks\DummyCommand;
 
 class CommandBusLaunchCommandTest extends CLITestCase
 {
