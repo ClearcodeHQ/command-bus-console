@@ -1,6 +1,6 @@
 <?php
 
-namespace ClearcodeHQ\CommandBusLauncherBundle\Command;
+namespace ClearcodeHQ\Bundle\CommandBusLauncherBundle\Command;
 
 use ClearcodeHQ\CommandBusLauncher\CommandLauncherException;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;

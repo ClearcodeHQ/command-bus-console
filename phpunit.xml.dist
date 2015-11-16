@@ -3,8 +3,13 @@
 <phpunit bootstrap="tests/bootstrap.php" colors="true">
 
     <testsuites>
-        <testsuite name="tests">
+        <testsuite name="unit">
             <directory suffix="Test.php">./tests</directory>
+            <exclude>./tests/Command</exclude>
+        </testsuite>
+
+        <testsuite name="command">
+            <directory suffix="Test.php">./tests/Command</directory>
         </testsuite>
     </testsuites>
 
@@ -18,7 +23,4 @@
         </whitelist>
     </filter>
 
-    <logging>
-        <log type="coverage-clover" target="build/logs/clover.xml"/>
-    </logging>
 </phpunit>

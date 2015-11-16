@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\ClearcodeHQ\CommandBusLauncherBundle\Mocks;
+namespace tests\ClearcodeHQ\Bundle\CommandBusLauncherBundle\Mocks;
 
 class DummyCommandHandler
 {

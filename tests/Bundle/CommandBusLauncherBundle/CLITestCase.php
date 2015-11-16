@@ -1,11 +1,12 @@
 <?php
 
-namespace tests\ClearcodeHQ\CommandBusLauncherBundle;
+namespace tests\ClearcodeHQ\Bundle\CommandBusLauncherBundle;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
+use tests\ClearcodeHQ\Bundle\CommandBusLauncherBundle\App\TestKernel;
 
 abstract class CLITestCase extends WebTestCase
 {
@@ -19,7 +20,7 @@ abstract class CLITestCase extends WebTestCase
     {
         include_once __DIR__.'/App/TestKernel.php';
 
-        return 'tests\ClearcodeHQ\CommandBusLauncherBundle\App\TestKernel';
+        return TestKernel::class;
     }
 
     /** {@inheritdoc} */
