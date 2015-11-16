@@ -1,12 +1,12 @@
 <?php
 
-namespace tests\Clearcode\CommandBusConsole\Bundle\CommandBusConsoleBundle;
+namespace tests\Clearcode\CommandBusConsole\Bundle;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
-use tests\Clearcode\CommandBusConsole\Bundle\CommandBusConsoleBundle\App\TestKernel;
+use tests\Clearcode\CommandBusConsole\Bundle\App\TestKernel;
 
 abstract class CLITestCase extends WebTestCase
 {

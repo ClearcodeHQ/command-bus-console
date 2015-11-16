@@ -1,6 +1,6 @@
 <?php
 
-namespace Clearcode\CommandBusConsole\Bundle\CommandBusConsoleBundle\DependencyInjection;
+namespace Clearcode\CommandBusConsole\Bundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

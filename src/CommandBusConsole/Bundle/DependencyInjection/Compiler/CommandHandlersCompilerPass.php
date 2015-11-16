@@ -1,6 +1,6 @@
 <?php
 
-namespace Clearcode\CommandBusConsole\Bundle\CommandBusConsoleBundle\DependencyInjection\Compiler;
+namespace Clearcode\CommandBusConsole\Bundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

@@ -1,8 +1,8 @@
 <?php
 
-namespace tests\Clearcode\CommandBusConsole\Bundle\CommandBusConsoleBundle\App;
+namespace tests\Clearcode\CommandBusConsole\Bundle\App;
 
-use Clearcode\CommandBusConsole\Bundle\CommandBusConsoleBundle\CommandBusConsoleBundle;
+use Clearcode\CommandBusConsole\Bundle\CommandBusConsoleBundle;
 use SimpleBus\SymfonyBridge\SimpleBusCommandBusBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;

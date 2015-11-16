@@ -1,6 +1,6 @@
 <?php
 
-namespace Clearcode\CommandBusConsole\Bundle\CommandBusConsoleBundle\Command;
+namespace Clearcode\CommandBusConsole\Bundle\Command;
 
 use Clearcode\CommandBusConsole\CommandConsoleException;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
