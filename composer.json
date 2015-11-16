@@ -1,11 +1,11 @@
 {
-    "name": "clearcodehq/command-bus-launcher-bundle",
+    "name": "clearcode/command-bus-console",
     "type": "library",
-    "description": "Automaticly launch CommandBus commands",
+    "description": "CLI for command bus.",
     "license": "MIT",
     "authors": [
         {
-            "name": "ClearcodeHQ",
+            "name": "Clearcode",
             "homepage": "http://clearcode.cc/"
         }
     ],
@@ -24,9 +24,9 @@
         "satooshi/php-coveralls": "^0.6.1"
     },
     "autoload": {
-        "psr-4" : { "ClearcodeHQ\\": "src" }
+        "psr-4" : { "Clearcode\\": "src" }
     },
     "autoload-dev": {
-        "psr-4" : { "tests\\ClearcodeHQ\\" : "tests" }
+        "psr-4" : { "tests\\Clearcode\\" : "tests" }
     }
 }
