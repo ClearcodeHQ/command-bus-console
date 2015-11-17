@@ -55,6 +55,19 @@ And it can be run as here:
     $ bin/console command-bus:handle SignUp john.doe john.doe@example.com 1985-06-24
     [2015-11-7 13:43:24] Command Fully\Qualified\Class\Name\Of\SignUp was handled.
 ```
+
+#### Non-interactive mode with more than one command of the same name.
+```console
+    $ bin/console command-bus:handle SignUp john.doe john.doe@example.com 1985-06-24
+    [2015-11-7 13:43:24][Error: 1] There is more than one command named "SignUp".
+```
+
+#### Non-interactive mode with command FQCN.
+```console
+    $ bin/console command-bus:handle Fully\Qualified\Class\Name\Of\SignUp john.doe john.doe@example.com 1985-06-24
+    [2015-11-7 13:43:24] Command Fully\Qualified\Class\Name\Of\SignUp was handled.
+```
+
 #### Interactive mode.
 ```console
     $ bin/console command-bus:handle SignUp
@@ -63,6 +76,22 @@ And it can be run as here:
     Date of birth: 1985-06-24
     [2015-11-7 13:43:24] Command Fully\Qualified\Class\Name\Of\SignUp was handled.
 ```
+
+#### Interactive mode with more than one command of the same name.
+```console
+    $ bin/console command-bus:handle SignUp
+    There are 3 "SignUp" commands:
+    :
+        [1] Domain\A\Context\SignUp
+        [2] Domain\B\Context\SignUp
+        [3] Domain\C\Context\SignUp
+    > 2
+    Username: john.doe
+    Email: john.doe@example.com
+    Date of birth: 1985-06-24
+    [2015-11-7 13:43:24] Command Domain\B\Context\SignUp was handled.
+```
+
 #### Interactive mode with choice arguments.
 ```console
     $ bin/console command-bus:handle SignUp
