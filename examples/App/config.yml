@@ -1,0 +1,15 @@
+parameters:
+    log_file: %kernel.logs_dir%/%kernel.environment%.log
+    secret: ThisTokenIsNotSoSecretChangeIt
+
+framework:
+    test: ~
+    secret: %secret%
+    form: ~
+    validation: ~
+
+#services:
+#    dummy_command:
+#        class: tests\Clearcode\CommandBusConsole\Bundle\Mocks\DummyCommandHandler
+#        tags:
+#            - { name: command_handler, handles: tests\Clearcode\CommandBusConsole\Bundle\Mocks\DummyCommand }
