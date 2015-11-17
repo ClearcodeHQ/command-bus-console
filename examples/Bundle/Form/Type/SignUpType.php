@@ -27,6 +27,13 @@ class SignUpType extends AbstractType
                 'label' => 'What\'s the time of sign up?',
                 'years' => range(1970, 2010),
             ])
+            ->add('sex', 'choice', [
+                'label' => 'What\'s your sex?',
+                'choices' => [
+                    'M' => 'Male',
+                    'F' => 'Female',
+                ],
+            ])
         ;
     }
 

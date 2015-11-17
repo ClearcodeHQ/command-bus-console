@@ -17,4 +17,7 @@ final class SignUp
 
     /** @var \DateTime */
     public $dateOfBirth;
+
+    /** @var string */
+    public $sex;
 }
