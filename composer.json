@@ -11,13 +11,13 @@
     ],
     "require": {
         "php": ">=5.5",
+        "symfony/framework-bundle": "~2.5",
         "simple-bus/symfony-bridge": "^4.1",
         "ramsey/uuid": "~3.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
         "satooshi/php-coveralls": "^0.6.1",
-        "symfony/framework-bundle": "~2.5",
         "matthiasnoback/symfony-console-form": "^1.1",
         "symfony/finder": "~2.5",
         "symfony/validator": "~2.5",
