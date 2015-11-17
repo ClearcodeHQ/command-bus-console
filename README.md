@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/ClearcodeHQ/command-bus-console.svg?branch=master)](https://travis-ci.org/ClearcodeHQ/command-bus-console)
 [![Coverage Status](https://coveralls.io/repos/ClearcodeHQ/command-bus-console/badge.svg?branch=master&service=github)](https://coveralls.io/github/ClearcodeHQ/command-bus-console?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ClearcodeHQ/command-bus-console/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ClearcodeHQ/command-bus-console/?branch=master)
 [![MIT License](https://img.shields.io/packagist/l/clearcode/command-bus-console.svg)](https://github.com/ClearcodeHQ/command-bus-console/blob/master/LICENSE)
 
 # Command Bus Console
