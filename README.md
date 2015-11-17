@@ -56,10 +56,22 @@ And it can be run as here:
     [2015-11-7 13:43:24] Command Fully\Qualified\Class\Name\Of\SignUp was handled.
 ```
 
+#### Non-interactive mode with named arguments.
+```console
+    $ bin/console command-bus:handle SignUp --email=john.doe@example.com --birth-date=1985-06-24 --username=john.doe
+    [2015-11-7 13:43:24] Command Fully\Qualified\Class\Name\Of\SignUp was handled.
+```
+
 #### Non-interactive mode with more than one command of the same name.
 ```console
     $ bin/console command-bus:handle SignUp john.doe john.doe@example.com 1985-06-24
     [2015-11-7 13:43:24][Error: 1] There is more than one command named "SignUp".
+```
+
+#### Non-interactive mode with missing argument(s).
+```console
+    $ bin/console command-bus:handle SignUp
+    [2015-11-7 13:43:24][Error: 2] Command Fully\Qualified\Class\Name\Of\SignUp requires 3 arguments (username, email, dateOfBirth).
 ```
 
 #### Non-interactive mode with command FQCN.
