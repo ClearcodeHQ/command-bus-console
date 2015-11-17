@@ -8,7 +8,7 @@ Command Bus Console is a package exposing your command bus functionality to the 
 
 # Installation
 
-```
+```console
 $ composer require clearcode/command-bus-console
 ```
 
@@ -29,7 +29,7 @@ Enable `Clearcode\CommandBusConsole\Bundle\CommandBusConsoleBundle` in the kerne
 
 # Usage
 
-```
+```console
 $ bin/console command-bus:console YourCommandClass firstArgument secondArgument ... nthArgument
 ```
 
@@ -44,19 +44,19 @@ Proof of concept is available in ```examples``` directory.
 
 And it can be run as here:
 
-```
+```console
     $ php examples/console.php run:interactive
 ```
 
 ## Examples of usage
 
 #### Non-interactive mode.
-```
+```console
     $ bin/console command-bus:handle SignUp john.doe john.doe@example.com 1985-06-24
     [2015-11-7 13:43:24] Command Fully\Qualified\Class\Name\Of\SignUp was handled.
 ```
 #### Interactive mode.
-```
+```console
     $ bin/console command-bus:handle SignUp
     Username: john.doe
     Email: john.doe@example.com
@@ -64,7 +64,7 @@ And it can be run as here:
     [2015-11-7 13:43:24] Command Fully\Qualified\Class\Name\Of\SignUp was handled.
 ```
 #### Interactive mode with choice arguments.
-```
+```console
     $ bin/console command-bus:handle SignUp
     Username: john.doe
     Email: john.doe@example.com
@@ -92,7 +92,7 @@ And it can be run as here:
     [2015-11-7 13:43:24] Command Fully\Qualified\Class\Name\Of\SignUp was handled.
 ```
 #### Interactive with default values.
-```
+```console
     $ bin/console command-bus:handle Pay
     Transaction id [91c48d9e-440a-4178-8463-c3b0e440862b]:
     Amount: 99.00
