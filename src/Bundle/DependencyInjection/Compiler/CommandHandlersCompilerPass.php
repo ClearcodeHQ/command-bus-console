@@ -12,6 +12,10 @@ class CommandHandlersCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
+        if (!$container->hasDefinition('command_bus_console.command_collector')) {
+            return;
+        }
+
         $commandHandlersTags = $container->findTaggedServiceIds('command_handler');
         $commandCollector = $container->getDefinition('command_bus_console.command_collector');
 
@@ -19,7 +23,13 @@ class CommandHandlersCompilerPass implements CompilerPassInterface
 
         foreach ($commandHandlersTags as $service) {
             foreach ($service as $tags) {
-                $commands[] = $tags['handles'];
+                $arguments = ['handles'  => $tags['handles']];
+
+                if (array_key_exists('form_type', $tags)) {
+                    $arguments['form_type'] = $tags['form_type'];
+                }
+
+                $commands[] = $arguments;
             }
         }
 

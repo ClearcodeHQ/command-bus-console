@@ -21,7 +21,8 @@
         "matthiasnoback/symfony-console-form": "^1.1",
         "symfony/finder": "~2.5",
         "symfony/validator": "~2.5",
-        "symfony/var-dumper": "~2.5"
+        "symfony/var-dumper": "~2.5",
+        "matthiasnoback/symfony-dependency-injection-test": "0.*"
     },
     "autoload": {
         "psr-4" : { "Clearcode\\CommandBusConsole\\": "src" }
