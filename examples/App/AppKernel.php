@@ -17,8 +17,8 @@ class AppKernel extends Kernel
         return [
             new FrameworkBundle(),
             new SimpleBusCommandBusBundle(),
-            new CommandBusConsoleBundle(),
             new SymfonyConsoleFormBundle(),
+            new CommandBusConsoleBundle()
         ];
     }
 

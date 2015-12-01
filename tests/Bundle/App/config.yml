@@ -5,6 +5,7 @@ parameters:
 framework:
     test: ~
     secret: %secret%
+    form: ~
 
 services:
     dummy_command:
