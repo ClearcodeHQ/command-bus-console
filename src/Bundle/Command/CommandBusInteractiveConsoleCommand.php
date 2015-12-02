@@ -37,6 +37,26 @@ class CommandBusInteractiveConsoleCommand extends ContainerAwareCommand
         $commandName = $input->getArgument('commandName');
         $command = $formHelper->interactUsingForm(new self::$commandToFormTypeMap[$commandName](), $input, $output);
 
-        $output->writeln(print_r($command, true));
+        try {
+            $this->getContainer()->get('command_bus')->handle($command);
+        } catch (\Exception $e) {
+            return $this->handleException($output, $e);
+        }
+
+        return $this->handleSuccess($output, $commandName);
+    }
+
+    private function handleException(OutputInterface $output, \Exception $exception)
+    {
+        $output->writeln(sprintf('<error>%s</error>', $exception->getMessage()));
+
+        return self::ERROR_CODE;
+    }
+
+    private function handleSuccess(OutputInterface $output, $commandName)
+    {
+        $output->writeln(sprintf('The <info>%s</info> executed with success.', $commandName));
+
+        return self::SUCCESS_CODE;
     }
 }

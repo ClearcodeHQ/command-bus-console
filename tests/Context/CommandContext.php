@@ -8,6 +8,7 @@ use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Gherkin\Node\PyStringNode;
 use Clearcode\CommandBusConsole\Bundle\Command\CommandBusInteractiveConsoleCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
+use tests\Clearcode\CommandBusConsole\Bundle\App\PrintDataCommand;
 use tests\Clearcode\CommandBusConsole\Bundle\App\TestKernel;
 use tests\Clearcode\CommandBusConsole\Bundle\Helper\ApplicationTester;
 use tests\Clearcode\CommandBusConsole\Bundle\Helper\StringUtil;
@@ -26,6 +27,7 @@ class CommandContext implements Context, SnippetAcceptingContext
 
         $kernel = new TestKernel('test', true);
         $this->application = new Application($kernel);
+        $this->application->add(new PrintDataCommand());
         $this->tester = new ApplicationTester($this->application);
     }
 
@@ -58,7 +60,7 @@ class CommandContext implements Context, SnippetAcceptingContext
         $input = str_replace('[enter]', "\n", $input);
         $this->tester->putToInputStream($input);
         $this->tester->run(
-            CommandBusInteractiveConsoleCommand::INTERACTIVE_COMMAND.' '.$commandName,
+            PrintDataCommand::COMMAND_NAME.' '.$commandName,
             ['interactive' => true, 'decorated' => false]
         );
     }
