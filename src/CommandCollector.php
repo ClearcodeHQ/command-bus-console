@@ -15,7 +15,7 @@ class CommandCollector
     public function processCommandServices(array $services)
     {
         foreach ($services as $service) {
-            $this->commands[] = CommandReflection::fromClass($service['handles']);
+            $this->commands[] = CommandReflection::fromClass($service);
         }
     }
 

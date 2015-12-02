@@ -26,32 +26,95 @@ class CommandHandlersCompilerPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'command_bus_console.command_collector',
             'processCommandServices',
-            [[['handles' => 'test_class']]]
+            [['test_class']]
         );
     }
 
     /**
      * @test
      */
-    public function it_should_collects_classes_names_and_form_types_by_adding_method_when_there_is_form_type_argument()
+    public function it_should_collects_classes_names_by_form_types()
     {
         $collectingService = new Definition();
-        $this->setDefinition('command_bus_console.command_collector', $collectingService);
+        $this->setDefinition('command_bus_console.command_form_type_map', $collectingService);
 
         $collectedService = new Definition();
-        $collectedService->addTag('command_handler', ['handles' => 'test_class', 'form_type' => 'form_type_name']);
+        $collectedService->addTag('command_form_type', ['command_class' => 'test_command_class']);
+        $collectedService->addTag('form.type', ['alias' => 'test_form_alias']);
         $this->setDefinition('colected_service_id', $collectedService);
 
         $this->compile();
 
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
-            'command_bus_console.command_collector',
-            'processCommandServices',
-            [[[
-                'handles'   => 'test_class',
-                'form_type' => 'form_type_name'
-            ]]]
+            'command_bus_console.command_form_type_map',
+            'processFormTypeServices',
+            [['test_command_class' => 'colected_service_id']]
         );
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_register_more_than_one_command_to_one_form_type()
+    {
+        $collectingService = new Definition();
+        $this->setDefinition('command_bus_console.command_form_type_map', $collectingService);
+
+        $collectedService = new Definition();
+        $collectedService->addTag('command_form_type', ['command_class' => 'test_command_class_1']);
+        $collectedService->addTag('command_form_type', ['command_class' => 'test_command_class_2']);
+        $collectedService->addTag('form.type', ['alias' => 'test_form_alias']);
+        $this->setDefinition('colected_service_id', $collectedService);
+
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
+            'command_bus_console.command_form_type_map',
+            'processFormTypeServices',
+            [[
+                'test_command_class_1' => 'colected_service_id',
+                'test_command_class_2' => 'colected_service_id',
+
+            ]]
+        );
+    }
+
+    /**
+     * @test
+     * @expectedException Clearcode\CommandBusConsole\Bundle\DependencyInjection\Compiler\CommandFormTypeDuplicate
+     */
+    public function it_should_throw_exception_when_command_name_is_duplicated()
+    {
+        $collectingService = new Definition();
+        $this->setDefinition('command_bus_console.command_form_type_map', $collectingService);
+
+        $collectedService = new Definition();
+        $collectedService->addTag('command_form_type', ['command_class' => 'test_command_class']);
+        $collectedService->addTag('form.type', ['alias' => 'test_form_alias']);
+        $this->setDefinition('colected_service_id', $collectedService);
+
+        $collectedServiceDuplicate = new Definition();
+        $collectedServiceDuplicate->addTag('command_form_type', ['command_class' => 'test_command_class']);
+        $collectedServiceDuplicate->addTag('form.type', ['alias' => 'another_test_form_alias']);
+        $this->setDefinition('colected_service_duplicate_id', $collectedServiceDuplicate);
+
+        $this->compile();
+    }
+
+    /**
+     * @test
+     * @expectedException Clearcode\CommandBusConsole\Bundle\DependencyInjection\Compiler\CommandFormTypeMissingFormTypeTag
+     */
+    public function it_should_throw_exception_when_form_type_tag_is_missing()
+    {
+        $collectingService = new Definition();
+        $this->setDefinition('command_bus_console.command_form_type_map', $collectingService);
+
+        $collectedService = new Definition();
+        $collectedService->addTag('command_form_type', ['command_class' => 'test_command_class']);
+        $this->setDefinition('colected_service_id', $collectedService);
+
+        $this->compile();
     }
 
     /**
