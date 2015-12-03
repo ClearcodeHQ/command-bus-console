@@ -33,8 +33,7 @@
             "examples\\Clearcode\\CommandBusConsole\\": "examples"
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    "minimum-stability": "stable",
     "extra": {
         "branch-alias": {
             "dev-master": "0.2.x-dev"
