@@ -22,7 +22,9 @@
         "matthiasnoback/symfony-console-form": "^1.1",
         "symfony/finder": "~2.5",
         "symfony/validator": "~2.5",
-        "symfony/var-dumper": "~2.5"
+        "symfony/var-dumper": "~2.5",
+        "symfony/class-loader": "~2.1",
+        "behat/behat": "^3.0"
     },
     "autoload": {
         "psr-4" : { "Clearcode\\CommandBusConsole\\": "src" }
