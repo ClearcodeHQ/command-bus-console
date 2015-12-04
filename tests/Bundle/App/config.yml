@@ -21,3 +21,8 @@ services:
         class: tests\Clearcode\CommandBusConsole\CommandBus\UnsuccessfulCommandHandler
         tags:
             - { name: command_handler, handles: tests\Clearcode\CommandBusConsole\CommandBus\UnsuccessfulCommand }
+
+    command_with_argument_handler:
+        class: tests\Clearcode\CommandBusConsole\CommandBus\CommandWithArgumentHandler
+        tags:
+            - { name: command_handler, handles: tests\Clearcode\CommandBusConsole\CommandBus\CommandWithArgument }
