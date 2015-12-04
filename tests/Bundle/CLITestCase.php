@@ -18,7 +18,7 @@ abstract class CLITestCase extends WebTestCase
     /** {@inheritdoc} */
     public static function getKernelClass()
     {
-        include_once __DIR__ . '/App/TestKernel.php';
+        include_once __DIR__.'/App/TestKernel.php';
 
         return TestKernel::class;
     }

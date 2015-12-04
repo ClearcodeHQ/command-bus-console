@@ -16,7 +16,7 @@ class CommandBusConsoleCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('command-bus:console')
+            ->setName('command-bus:handle')
             ->setDescription('CLI for command bus.')
             ->addArgument('commandName', InputArgument::REQUIRED)
             ->addArgument('arguments', InputArgument::IS_ARRAY);
@@ -35,7 +35,6 @@ class CommandBusConsoleCommand extends ContainerAwareCommand
         } catch (CommandConsoleException $e) {
             return $this->handleException($output, $e);
         }
-
         try {
             $this->getContainer()->get('command_bus')->handle($command);
         } catch (\Exception $e) {

@@ -11,3 +11,8 @@ services:
         class: tests\Clearcode\CommandBusConsole\Bundle\Mocks\DummyCommandHandler
         tags:
             - { name: command_handler, handles: tests\Clearcode\CommandBusConsole\Bundle\Mocks\DummyCommand }
+
+    successful_command_handler:
+        class: tests\Clearcode\CommandBusConsole\CommandBus\SuccessfulCommandHandler
+        tags:
+            - { name: command_handler, handles: tests\Clearcode\CommandBusConsole\CommandBus\SuccessfulCommand }

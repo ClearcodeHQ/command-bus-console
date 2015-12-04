@@ -23,6 +23,7 @@ install:
 
 script:
   - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+  - vendor/bin/behat
 
 after_script:
   - vendor/bin/coveralls
