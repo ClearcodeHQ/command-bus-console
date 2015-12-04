@@ -37,6 +37,17 @@ class CommandFormTypeMapTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @test
+     * @expectedException SimpleBus\Message\CallableResolver\Exception\UndefinedCallable
+     */
+    public function it_throws_exception_undefined_command_is_called()
+    {
+        $this->sut->processFormTypeServices($this->commandFormTypes);
+
+        $this->sut->get('undefined_command_name');
+    }
+
     public function setUp()
     {
         /** @var ObjectProphecy|CallableResolver $resolver */
