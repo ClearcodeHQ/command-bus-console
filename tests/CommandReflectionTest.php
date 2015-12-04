@@ -7,7 +7,7 @@ use Clearcode\CommandBusConsole\CommandReflection;
 use Clearcode\CommandBusConsole\ValueConverter\IntConverter;
 use Clearcode\CommandBusConsole\ValueConverter\UuidConverter;
 use Ramsey\Uuid\Uuid;
-use tests\Clearcode\CommandBusConsole\Mocks\DummyCommand;
+use tests\Clearcode\CommandBusConsole\Mocks\SignUpUser;
 use tests\Clearcode\CommandBusConsole\Mocks\DummyCommandWithUuid;
 
 class CommandReflectionTest extends \PHPUnit_Framework_TestCase
@@ -17,7 +17,7 @@ class CommandReflectionTest extends \PHPUnit_Framework_TestCase
      */
     public function it_can_be_created_from_class_name()
     {
-        $commandReflection = CommandReflection::fromClass(DummyCommand::class);
+        $commandReflection = CommandReflection::fromClass(SignUpUser::class);
 
         \PHPUnit_Framework_Assert::assertInstanceOf(CommandReflection::class, $commandReflection);
     }
@@ -28,14 +28,14 @@ class CommandReflectionTest extends \PHPUnit_Framework_TestCase
     public function it_returns_new_command_instance()
     {
         $argumentProcessor = new ArgumentsProcessor([new IntConverter()]);
-        $commandReflection = CommandReflection::fromClass(DummyCommand::class);
+        $commandReflection = CommandReflection::fromClass(SignUpUser::class);
 
-        $commandParameters = ['lorem ipsum', '2'];
+        $commandParameters = ['Jacek Jagiello', 'j.jagiello@clearcode.cc'];
         $command = $commandReflection->createCommand($commandParameters, $argumentProcessor);
 
-        \PHPUnit_Framework_Assert::assertInstanceOf(DummyCommand::class, $command);
-        \PHPUnit_Framework_Assert::assertEquals('lorem ipsum', $command->argument1);
-        \PHPUnit_Framework_Assert::assertTrue(2 === $command->argument2);
+        \PHPUnit_Framework_Assert::assertInstanceOf(SignUpUser::class, $command);
+        \PHPUnit_Framework_Assert::assertEquals('Jacek Jagiello', $command->fullName);
+        \PHPUnit_Framework_Assert::assertTrue('j.jagiello@clearcode.cc' === $command->email);
     }
 
     /**
@@ -59,12 +59,12 @@ class CommandReflectionTest extends \PHPUnit_Framework_TestCase
      */
     public function it_returns_command_constructor_parameters()
     {
-        $commandReflection = CommandReflection::fromClass(DummyCommand::class);
+        $commandReflection = CommandReflection::fromClass(SignUpUser::class);
 
         $commandParameters = $commandReflection->parameters();
 
-        \PHPUnit_Framework_Assert::assertEquals('argument1', $commandParameters[0]->name);
-        \PHPUnit_Framework_Assert::assertEquals('argument2', $commandParameters[1]->name);
+        \PHPUnit_Framework_Assert::assertEquals('fullName', $commandParameters[0]->name);
+        \PHPUnit_Framework_Assert::assertEquals('email', $commandParameters[1]->name);
     }
 
     /**

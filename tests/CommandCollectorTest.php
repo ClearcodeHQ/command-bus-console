@@ -4,7 +4,7 @@ namespace tests\Clearcode\CommandBusConsole;
 
 use Clearcode\CommandBusConsole\CommandCollector;
 use Clearcode\CommandBusConsole\CommandReflection;
-use tests\Clearcode\CommandBusConsole\Mocks\DummyCommand;
+use tests\Clearcode\CommandBusConsole\Mocks\SignUpUser;
 
 class CommandCollectorTest extends \PHPUnit_Framework_TestCase
 {
@@ -26,8 +26,8 @@ class CommandCollectorTest extends \PHPUnit_Framework_TestCase
         $this->sut->processCommandServices($this->commands);
 
         \PHPUnit_Framework_Assert::assertEquals(
-            'DummyCommand',
-            $this->sut->getCommandByName('DummyCommand')->commandName
+            'SignUpUser',
+            $this->sut->getCommandByName('SignUpUser')->commandName
         );
     }
 
@@ -38,7 +38,7 @@ class CommandCollectorTest extends \PHPUnit_Framework_TestCase
     {
         $this->sut->processCommandServices($this->commands);
 
-        $command = $this->sut->getCommandByName('DummyCommand');
+        $command = $this->sut->getCommandByName('SignUpUser');
 
         \PHPUnit_Framework_Assert::assertInstanceOf(CommandReflection::class, $command);
     }
@@ -59,7 +59,7 @@ class CommandCollectorTest extends \PHPUnit_Framework_TestCase
         $this->sut = new CommandCollector();
 
         $this->commands = [
-            DummyCommand::class,
+            SignUpUser::class,
         ];
     }
 }

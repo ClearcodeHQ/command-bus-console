@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use tests\Clearcode\CommandBusConsole\Bundle\Type\DummyCommandType;
+use tests\Clearcode\CommandBusConsole\Bundle\Type\SignUpUserType;
 
 class CommandBusInteractiveConsoleCommand extends ContainerAwareCommand
 {
@@ -17,7 +17,7 @@ class CommandBusInteractiveConsoleCommand extends ContainerAwareCommand
     const INTERACTIVE_COMMAND = 'command-bus:handle';
 
     private static $commandToFormTypeMap = [
-        'DummyCommand' => DummyCommandType::class,
+        'DummyCommand' => SignUpUserType::class,
     ];
 
     protected function configure()

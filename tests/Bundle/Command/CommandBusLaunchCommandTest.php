@@ -4,7 +4,7 @@ namespace tests\Clearcode\CommandBusConsole\Bundle\Command;
 
 use Clearcode\CommandBusConsole\Bundle\Command\CommandBusConsoleCommand;
 use tests\Clearcode\CommandBusConsole\Bundle\CLITestCase;
-use tests\Clearcode\CommandBusConsole\Bundle\Mocks\DummyCommand;
+use tests\Clearcode\CommandBusConsole\Bundle\Mocks\SendInvitation;
 
 class CommandBusLaunchCommandTest extends CLITestCase
 {
@@ -12,12 +12,11 @@ class CommandBusLaunchCommandTest extends CLITestCase
     public function it_should_execute_command_with_success()
     {
         $this->executeCommand(new CommandBusConsoleCommand(), [
-            'commandName' => 'DummyCommand',
-            'arguments' => [DummyCommand::HANDLING_WITH_SUCCESS],
+            'commandName' => 'SendInvitation',
+            'arguments' => [SendInvitation::HANDLING_WITH_SUCCESS],
         ]);
 
         $this->assertThatStatusCodeEquals(CommandBusConsoleCommand::SUCCESS_CODE);
-        $this->assertThatOutputContains('executed with success');
     }
 
     /** @test */
@@ -37,23 +36,21 @@ class CommandBusLaunchCommandTest extends CLITestCase
         $this->markTestIncomplete();
 
         $this->executeCommand(new CommandBusConsoleCommand(), [
-            'commandName' => 'DummyCommand',
+            'commandName' => 'SendInvitation',
             'arguments' => [],
         ]);
 
         $this->assertThatStatusCodeEquals(CommandBusConsoleCommand::ERROR_CODE);
-        $this->assertThatOutputContains('An unexpected error occurred.');
     }
 
     /** @test */
     public function it_display_an_error_when_executing_command_will_fail()
     {
         $this->executeCommand(new CommandBusConsoleCommand(), [
-            'commandName' => 'DummyCommand',
-            'arguments' => [DummyCommand::HANDLING_WITH_FAIL],
+            'commandName' => 'NonExistingCommand',
+            'arguments' => [SendInvitation::HANDLING_WITH_FAIL],
         ]);
 
         $this->assertThatStatusCodeEquals(CommandBusConsoleCommand::ERROR_CODE);
-        $this->assertThatOutputContains('An unexpected error occurred.');
     }
 }

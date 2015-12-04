@@ -6,8 +6,9 @@ use Clearcode\CommandBusConsole\ArgumentsProcessor;
 use Clearcode\CommandBusConsole\CommandCollector;
 use Clearcode\CommandBusConsole\CommandLauncher;
 use Clearcode\CommandBusConsole\CommandReflection;
+use Prophecy\Argument;
 use Ramsey\Uuid\Uuid;
-use tests\Clearcode\CommandBusConsole\Mocks\DummyCommand;
+use tests\Clearcode\CommandBusConsole\Mocks\SignUpUser;
 use tests\Clearcode\CommandBusConsole\Mocks\DummyCommandWithUuid;
 
 class CommandLauncherTest extends \PHPUnit_Framework_TestCase
@@ -23,18 +24,19 @@ class CommandLauncherTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function it_returns_command_with_integer_to_launch()
     {
-        $this->commandCollector->getCommandByName('DummyCommand')->willReturn(
-            CommandReflection::fromClass(DummyCommand::class)
+        $this->commandCollector->getCommandByName('SignUpUser')->willReturn(
+            CommandReflection::fromClass(SignUpUser::class)
         );
 
-        $this->argumentsProcessor->process(['lorem ipsum', '123'])->willReturn(
-            ['lorem ipsum', 123]
+        $this->argumentsProcessor->process(Argument::any())->willReturn(
+            ['Jacek Jagiello', 'j.jagiello@clearcode.cc']
         );
 
-        $command = $this->sut->getCommandToLaunch('DummyCommand', ['lorem ipsum', 123]);
+        $command = $this->sut->getCommandToLaunch('SignUpUser', ['Jacek Jagiello', 'j.jagiello@clearcode.cc']);
 
-        $this->assertInstanceOf(DummyCommand::class, $command);
-        $this->assertTrue(123 === $command->argument2);
+        $this->assertInstanceOf(SignUpUser::class, $command);
+        $this->assertTrue('Jacek Jagiello' === $command->fullName);
+        $this->assertTrue('j.jagiello@clearcode.cc' === $command->email);
     }
 
     /** @test */
@@ -57,11 +59,11 @@ class CommandLauncherTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function it_returns_command_reflection()
     {
-        $this->commandCollector->getCommandByName('DummyCommand')->willReturn(
-            CommandReflection::fromClass(DummyCommand::class)
+        $this->commandCollector->getCommandByName('SignUpUser')->willReturn(
+            CommandReflection::fromClass(SignUpUser::class)
         );
 
-        $commandReflection = $this->sut->getCommandReflection('DummyCommand');
+        $commandReflection = $this->sut->getCommandReflection('SignUpUser');
 
         $this->assertInstanceOf(CommandReflection::class, $commandReflection);
     }

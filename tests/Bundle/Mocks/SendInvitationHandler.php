@@ -2,16 +2,16 @@
 
 namespace tests\Clearcode\CommandBusConsole\Bundle\Mocks;
 
-class DummyCommandHandler
+class SendInvitationHandler
 {
     /**
-     * @param DummyCommand $command
+     * @param SendInvitation $command
      *
      * @throws \Exception
      */
-    public function handle(DummyCommand $command)
+    public function handle(SendInvitation $command)
     {
-        if ($command->argument1 == DummyCommand::HANDLING_WITH_FAIL) {
+        if ($command->argument1 == SendInvitation::HANDLING_WITH_FAIL) {
             throw new \Exception('An unexpected error occurred.');
         }
     }

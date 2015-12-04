@@ -7,16 +7,16 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-use tests\Clearcode\CommandBusConsole\Bundle\Mocks\DummyCommand;
+use tests\Clearcode\CommandBusConsole\Bundle\Mocks\SendInvitation;
 
-class DummyCommandType extends AbstractType
+class SignUpUserType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('argument1', 'text', [
+        $builder->add('email', 'text', [
             'label' => 'What\'s first argument?',
         ]);
     }
@@ -24,9 +24,9 @@ class DummyCommandType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => DummyCommand::class,
+            'data_class' => SendInvitation::class,
             'empty_data' => function (FormInterface $form) {
-                return new DummyCommand($form->get('argument1')->getData());
+                return new SendInvitation($form->get('argument1')->getData());
             },
         ]);
     }

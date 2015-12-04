@@ -2,7 +2,7 @@
 
 namespace tests\Clearcode\CommandBusConsole\Bundle\Mocks;
 
-class DummyCommand
+class SendInvitation
 {
     const HANDLING_WITH_SUCCESS = 'HANDLING_WITH_SUCCESS';
     const HANDLING_WITH_FAIL = 'HANDLING_WITH_FAIL';

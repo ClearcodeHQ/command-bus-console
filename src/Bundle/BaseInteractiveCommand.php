@@ -5,12 +5,12 @@ namespace Clearcode\CommandBusConsole\Bundle;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use tests\Clearcode\CommandBusConsole\Bundle\Type\DummyCommandType;
+use tests\Clearcode\CommandBusConsole\Bundle\Type\SignUpUserType;
 
 class BaseInteractiveCommand extends ContainerAwareCommand
 {
     private static $commandToFormTypeMap = [
-        'DummyCommand' => DummyCommandType::class,
+        'DummyCommand' => SignUpUserType::class,
     ];
 
     /**

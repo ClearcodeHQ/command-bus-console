@@ -8,7 +8,7 @@ framework:
     form: ~
 
 services:
-    dummy_command:
-        class: tests\Clearcode\CommandBusConsole\Bundle\Mocks\DummyCommandHandler
+    send_invitation:
+        class: tests\Clearcode\CommandBusConsole\Bundle\Mocks\SendInvitationHandler
         tags:
-            - { name: command_handler, handles: tests\Clearcode\CommandBusConsole\Bundle\Mocks\DummyCommand }
+            - { name: command_handler, handles: tests\Clearcode\CommandBusConsole\Bundle\Mocks\SendInvitation }
