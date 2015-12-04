@@ -1,0 +1,7 @@
+default:
+    autoload:
+        - %paths.base%/vendor/autoload.php
+    suites:
+        default:
+            contexts:
+                - tests\Clearcode\CommandBusConsole\Contexts\CLIContext

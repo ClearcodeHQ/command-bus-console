@@ -37,9 +37,10 @@ class CommandReflection
     public function parameters()
     {
         $commandReflection = new \ReflectionClass($this->commandClass);
-        $commandParameters = $commandReflection->getConstructor()->getParameters();
 
-        return $commandParameters;
+        return $commandParameters = $commandReflection->getConstructor() ?
+            $commandReflection->getConstructor()->getParameters() :
+            [];
     }
 
     /**

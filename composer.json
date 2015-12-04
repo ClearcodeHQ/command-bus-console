@@ -13,7 +13,8 @@
         "php": ">=5.5",
         "symfony/framework-bundle": "~2.5",
         "simple-bus/symfony-bridge": "^4.1",
-        "ramsey/uuid": "~3.0"
+        "ramsey/uuid": "~3.0",
+        "symfony/yaml": "~2.5"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
@@ -21,6 +22,8 @@
         "matthiasnoback/symfony-console-form": "^1.1",
         "symfony/finder": "~2.5",
         "symfony/validator": "~2.5",
+        "symfony/class-loader": "~2.1",
+        "behat/behat": "^3.0",
         "symfony/var-dumper": "~2.5",
         "matthiasnoback/symfony-dependency-injection-test": "0.*"
     },
@@ -33,8 +36,7 @@
             "examples\\Clearcode\\CommandBusConsole\\": "examples"
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    "minimum-stability": "stable",
     "extra": {
         "branch-alias": {
             "dev-master": "0.2.x-dev"
