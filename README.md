@@ -33,7 +33,7 @@ Enable `Clearcode\CommandBusConsole\Bundle\CommandBusConsoleBundle` in the kerne
 ## Run command with ordered arguments
 
 ```console
-$ bin/console command-bus:console YourCommandClass firstArgument secondArgument ... nthArgument
+$ bin/console command-bus:handle YourCommandClass firstArgument secondArgument ... nthArgument
 
 The YourCommandClass executed with success.
 ```
@@ -41,7 +41,7 @@ The YourCommandClass executed with success.
 ## Run command with named arguments
 
 ```console
-$ bin/console command-bus:console YourCommandClass firstArgument=value1 secondArgument=value2 ... nthArgument=valueN
+$ bin/console command-bus:handle YourCommandClass firstArgument=value1 secondArgument=value2 ... nthArgument=valueN
 
 The YourCommandClass executed with success.
 ```
