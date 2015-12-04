@@ -6,7 +6,7 @@ use Assert\Assertion;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Gherkin\Node\PyStringNode;
-use Clearcode\CommandBusConsole\Bundle\Command\CommandBusConsoleCommand;
+use Clearcode\CommandBusConsole\Bundle\Command\CommandBusHandleCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use tests\Clearcode\CommandBusConsole\Bundle\App\TestKernel;
 use tests\Clearcode\CommandBusConsole\Helper\ApplicationTester;
@@ -20,7 +20,7 @@ class CLIContext implements Context, SnippetAcceptingContext
         $kernel = new TestKernel('test', false);
         $app = new Application($kernel);
 
-        $app->add(new CommandBusConsoleCommand());
+        $app->add(new CommandBusHandleCommand());
 
         $this->tester = new ApplicationTester($app);
     }

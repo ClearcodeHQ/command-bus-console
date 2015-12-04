@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CommandBusConsoleCommand extends ContainerAwareCommand
+class CommandBusHandleCommand extends ContainerAwareCommand
 {
     const SUCCESS_CODE = 0;
     const ERROR_CODE = 1;
