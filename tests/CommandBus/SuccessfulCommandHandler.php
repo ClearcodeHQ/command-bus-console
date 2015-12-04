@@ -4,7 +4,7 @@ namespace tests\Clearcode\CommandBusConsole\CommandBus;
 
 final class SuccessfulCommandHandler
 {
-    public function handle(SuccessfulCommand $successCommand)
+    public function handle(SuccessfulCommand $command)
     {
     }
 }

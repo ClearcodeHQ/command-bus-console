@@ -42,6 +42,14 @@ class CLIContext implements Context, SnippetAcceptingContext
     }
 
     /**
+     * @Then command should end unsuccessfully
+     */
+    public function commandShouldEndUnsuccessfully()
+    {
+        Assertion::notSame($this->tester->getExitCode(), 0);
+    }
+
+    /**
      * @Then the output should be
      *
      * @param PyStringNode $expectedOutput
