@@ -80,7 +80,7 @@ class CommandReflection
 
             if (null === $argument) {
                 throw new MissingCommandArgument(
-                    sprintf("Missing argument %s for '%s' command", $commandArgument->getPosition() + 1, $this->commandName)
+                    sprintf("Missing argument %s for '%s' command.", $commandArgument->getPosition() + 1, $this->commandName)
                 );
             }
 
@@ -90,7 +90,7 @@ class CommandReflection
                 if (!$argument instanceof $argumentClass) {
                     throw new InvalidCommandArgument(
                         sprintf(
-                            "Invalid argument for '%s' command. Expected parameter %s to be instance of '%s'",
+                            "Invalid argument for '%s' command. Expected parameter %s to be instance of '%s'.",
                             $this->commandName,
                             $commandArgument->getPosition() + 1,
                             $argumentClass
