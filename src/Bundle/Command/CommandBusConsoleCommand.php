@@ -30,6 +30,8 @@ class CommandBusConsoleCommand extends ContainerAwareCommand
         $commandToLunch = $input->getArgument('commandName');
         $arguments = $input->getArgument('arguments');
 
+        $arguments = $this->parseNamedArguments($arguments);
+
         try {
             $command = $commandLauncher->getCommandToLaunch($commandToLunch, $arguments);
         } catch (CommandConsoleException $e) {
@@ -56,5 +58,24 @@ class CommandBusConsoleCommand extends ContainerAwareCommand
         $output->writeln(sprintf('The <info>%s</info> executed with success.', $commandToLunch));
 
         return self::SUCCESS_CODE;
+    }
+
+    /**
+     * @param string[] $arguments
+     *
+     * @return string[]
+     */
+    protected function parseNamedArguments(array $arguments)
+    {
+        foreach ($arguments as $key => $argument) {
+            if (strpos($argument, '=')) {
+                list($arg, $value) = explode('=', $argument);
+
+                unset($arguments[$key]);
+                $arguments[$arg] = $value;
+            }
+        }
+
+        return $arguments;
     }
 }

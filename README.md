@@ -30,8 +30,20 @@ Enable `Clearcode\CommandBusConsole\Bundle\CommandBusConsoleBundle` in the kerne
 
 # Usage
 
+## Run command with ordered arguments
+
 ```console
 $ bin/console command-bus:console YourCommandClass firstArgument secondArgument ... nthArgument
+
+The YourCommandClass executed with success.
+```
+
+## Run command with named arguments
+
+```console
+$ bin/console command-bus:console YourCommandClass firstArgument=value1 secondArgument=value2 ... nthArgument=valueN
+
+The YourCommandClass executed with success.
 ```
 
 # License

@@ -58,30 +58,50 @@ class CommandReflection
 
         $inputArguments = $argumentsProcessor->process($arguments);
 
+        $arrayDivide = function (array $array, callable $predicate) {
+            return [
+                array_filter($array, function ($value, $key) use ($predicate) { return $predicate($key, $value); }, ARRAY_FILTER_USE_BOTH),
+                array_filter($array, function ($value, $key) use ($predicate) { return !$predicate($key, $value); }, ARRAY_FILTER_USE_BOTH),
+            ];
+        };
+
+        $isKeyInteger = function ($key) {
+            return is_integer($key);
+        };
+
+        list($orderedArguments, $namedArguments) = $arrayDivide($inputArguments, $isKeyInteger);
+
+        $constructorArguments = [];
+
         foreach ($this->parameters() as $commandArgument) {
-            if ($commandArgument->getClass() !== null) {
-                if (!array_key_exists($commandArgument->getPosition(), $inputArguments)) {
-                    throw new MissingCommandArgument(
-                        sprintf("Missing argument %s for '%s' command", $commandArgument->getPosition() + 1, $this->commandName)
-                    );
-                }
+            $argument = array_key_exists($commandArgument->getName(), $namedArguments) ?
+                $namedArguments[$commandArgument->getName()] :
+                array_shift($orderedArguments);
 
-                $givenArgument = $inputArguments[$commandArgument->getPosition()];
-                $requiredArgumentClass = $commandArgument->getClass()->name;
+            if (null === $argument) {
+                throw new MissingCommandArgument(
+                    sprintf("Missing argument %s for '%s' command", $commandArgument->getPosition() + 1, $this->commandName)
+                );
+            }
 
-                if (!is_object($givenArgument) || !$givenArgument instanceof $requiredArgumentClass) {
+            if (null !== $commandArgument->getClass()) {
+                $argumentClass = $commandArgument->getClass()->getName();
+
+                if (!$argument instanceof $argumentClass) {
                     throw new InvalidCommandArgument(
                         sprintf(
                             "Invalid argument for '%s' command. Expected parameter %s to be instance of '%s'",
                             $this->commandName,
                             $commandArgument->getPosition() + 1,
-                            $requiredArgumentClass
+                            $argumentClass
                         )
                     );
                 }
             }
+
+            $constructorArguments[$commandArgument->getPosition()] = $argument;
         }
 
-        return $classReflection->newInstanceArgs($inputArguments);
+        return $classReflection->newInstanceArgs($constructorArguments);
     }
 }
