@@ -18,3 +18,8 @@ services:
         arguments:
             - @command_bus_console.command_collector
             - @command_bus_console.arguments_processor
+
+    command_bus_console.command_form_type_map:
+        class: Clearcode\CommandBusConsole\CommandFormTypeMap
+        arguments:
+            - '@simple_bus.command_bus.callable_resolver'

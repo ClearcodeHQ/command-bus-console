@@ -59,7 +59,7 @@ class CommandCollectorTest extends \PHPUnit_Framework_TestCase
         $this->sut = new CommandCollector();
 
         $this->commands = [
-            DummyCommand::class,
+            DummyCommand::class
         ];
     }
 }
