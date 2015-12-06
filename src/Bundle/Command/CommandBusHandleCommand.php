@@ -2,16 +2,31 @@
 
 namespace Clearcode\CommandBusConsole\Bundle\Command;
 
-use Clearcode\CommandBusConsole\CommandConsoleException;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Matthias\SymfonyConsoleForm\Console\Command\InteractiveFormContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CommandBusHandleCommand extends ContainerAwareCommand
+class CommandBusHandleCommand extends InteractiveFormContainerAwareCommand
 {
     const SUCCESS_CODE = 0;
     const ERROR_CODE = 1;
+
+    private $formType;
+
+    /** {@inheritdoc} */
+    public function formType()
+    {
+        return $this->formType;
+    }
+
+    /**
+     * @param string $formType
+     */
+    public function setFormType($formType)
+    {
+        $this->formType = $formType;
+    }
 
     protected function configure()
     {
@@ -19,31 +34,19 @@ class CommandBusHandleCommand extends ContainerAwareCommand
             ->setName('command-bus:handle')
             ->setDescription('CLI for command bus.')
             ->addArgument('commandName', InputArgument::REQUIRED)
-            ->addArgument('arguments', InputArgument::IS_ARRAY);
+        ;
     }
 
     /** {@inheritdoc} */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $commandLauncher = $this->getContainer()->get('command_bus_console.command_launcher');
-
-        $commandToLunch = $input->getArgument('commandName');
-        $arguments = $input->getArgument('arguments');
-
-        $arguments = $this->parseNamedArguments($arguments);
-
         try {
-            $command = $commandLauncher->getCommandToLaunch($commandToLunch, $arguments);
-        } catch (CommandConsoleException $e) {
-            return $this->handleException($output, $e);
-        }
-        try {
-            $this->getContainer()->get('command_bus')->handle($command);
+            $this->getContainer()->get('command_bus')->handle($this->formData());
         } catch (\Exception $e) {
             return $this->handleException($output, $e);
         }
 
-        return $this->handleSuccess($output, $commandToLunch);
+        return $this->handleSuccess($output, get_class($this->formData()));
     }
 
     private function handleException(OutputInterface $output, \Exception $exception)

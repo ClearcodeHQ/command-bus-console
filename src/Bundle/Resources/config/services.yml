@@ -1,20 +1,10 @@
 services:
-    command_bus_console.command_collector:
-        class: Clearcode\CommandBusConsole\CommandCollector
+    command_bus_console.command_form_type_map:
+        class: Clearcode\CommandBusConsole\CommandFormTypeMap
 
-    command_bus_console.value_conveters.uuid:
-        class: Clearcode\CommandBusConsole\ValueConverter\UuidConverter
-
-    command_bus_console.value_conveters.int:
-        class: Clearcode\CommandBusConsole\ValueConverter\IntConverter
-
-    command_bus_console.arguments_processor:
-        class: Clearcode\CommandBusConsole\ArgumentsProcessor
+    command_bus_console.console.event_listener.set_form_type_of_form_based_command:
+        class: Clearcode\CommandBusConsole\Console\EventListener\SetFormTypeOfFormBasedCommandEventListener
         arguments:
-            - [@command_bus_console.value_conveters.uuid, @command_bus_console.value_conveters.int]
-
-    command_bus_console.command_launcher:
-        class: Clearcode\CommandBusConsole\CommandLauncher
-        arguments:
-            - @command_bus_console.command_collector
-            - @command_bus_console.arguments_processor
+            - "@command_bus_console.command_form_type_map"
+        tags:
+            - { name: kernel.event_listener, event: console.command, method: onConsoleCommand, priority: 2048 }

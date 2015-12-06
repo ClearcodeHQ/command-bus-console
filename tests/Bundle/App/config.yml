@@ -5,13 +5,9 @@ parameters:
 framework:
     test: ~
     secret: %secret%
+    form: ~
 
 services:
-    dummy_command:
-        class: tests\Clearcode\CommandBusConsole\Bundle\Mocks\DummyCommandHandler
-        tags:
-            - { name: command_handler, handles: tests\Clearcode\CommandBusConsole\Bundle\Mocks\DummyCommand }
-
     successful_command_handler:
         class: tests\Clearcode\CommandBusConsole\CommandBus\SuccessfulCommandHandler
         tags:
@@ -26,3 +22,21 @@ services:
         class: tests\Clearcode\CommandBusConsole\CommandBus\CommandWithArgumentHandler
         tags:
             - { name: command_handler, handles: tests\Clearcode\CommandBusConsole\CommandBus\CommandWithArgument }
+
+    successful_command_form_type:
+        class: tests\Clearcode\CommandBusConsole\Form\SuccessfulCommandFormType
+        tags:
+            - { name: form.type }
+            - { name: command.type, command: tests\Clearcode\CommandBusConsole\CommandBus\SuccessfulCommand }
+
+    unsuccessful_command_form_type:
+        class: tests\Clearcode\CommandBusConsole\Form\UnsuccessfulCommandFormType
+        tags:
+            - { name: form.type }
+            - { name: command.type, command: tests\Clearcode\CommandBusConsole\CommandBus\UnsuccessfulCommand }
+
+    command_with_argument_form_type:
+        class: tests\Clearcode\CommandBusConsole\Form\CommandWithArgumentFormType
+        tags:
+            - { name: form.type }
+            - { name: command.type, command: tests\Clearcode\CommandBusConsole\CommandBus\CommandWithArgument }
