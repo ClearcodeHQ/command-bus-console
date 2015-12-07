@@ -26,17 +26,17 @@ services:
     successful_command_form_type:
         class: tests\Clearcode\CommandBusConsole\Form\SuccessfulCommandFormType
         tags:
-            - { name: form.type }
+            - { name: form.type, alias: successful_command }
             - { name: command_bus.type, command: tests\Clearcode\CommandBusConsole\CommandBus\SuccessfulCommand, alias: successful-command }
 
     unsuccessful_command_form_type:
         class: tests\Clearcode\CommandBusConsole\Form\UnsuccessfulCommandFormType
         tags:
-            - { name: form.type }
+            - { name: form.type, alias: unsuccessful_command }
             - { name: command_bus.type, command: tests\Clearcode\CommandBusConsole\CommandBus\UnsuccessfulCommand, alias: unsuccessful-command }
 
     command_with_argument_form_type:
         class: tests\Clearcode\CommandBusConsole\Form\CommandWithArgumentFormType
         tags:
-            - { name: form.type }
+            - { name: form.type, alias: command_with_argument }
             - { name: command_bus.type, command: tests\Clearcode\CommandBusConsole\CommandBus\CommandWithArgument, alias: command-with-argument }

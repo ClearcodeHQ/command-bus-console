@@ -29,6 +29,7 @@ class RegisterConsoleCommandsCompilerPass implements CompilerPassInterface
                     ->setClass(CommandBusHandleCommand::class)
                     ->addArgument($formTypeTagAttributes[0]['alias'])
                     ->addArgument($formTypeDefinition->getClass())
+                    ->addArgument($this->legacyFormTypeAlias($formTypeDefinition))
                     ->addTag('console.command')
             );
         }
@@ -90,6 +91,18 @@ class RegisterConsoleCommandsCompilerPass implements CompilerPassInterface
                 $serviceId,
                 self::TAG
             ));
+        }
+    }
+
+    /**
+     * @param $formTypeDefinition
+     *
+     * @return mixed
+     */
+    protected function legacyFormTypeAlias($formTypeDefinition)
+    {
+        if (array_key_exists('alias', $formTypeDefinition->getTag('form.type')[0])) {
+            return $formTypeDefinition->getTag('form.type')[0]['alias'];
         }
     }
 }

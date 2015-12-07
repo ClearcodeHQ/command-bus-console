@@ -2,7 +2,7 @@ Feature: Handle command
 
   Scenario: Successfully handle command
     When I run command "command-bus:successful-command --no-interaction"
-#    Then command should end successfully
+    Then command should end successfully
      And the output should be
           """
           The tests\Clearcode\CommandBusConsole\CommandBus\SuccessfulCommand executed with success.
@@ -37,7 +37,7 @@ Feature: Handle command
         """
         1234[enter]
         """
-#    Then command should end successfully
+    Then command should end successfully
      And the output should contain
           """
           The tests\Clearcode\CommandBusConsole\CommandBus\CommandWithArgument executed with success.

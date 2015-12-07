@@ -18,7 +18,7 @@ class RegisterConsoleCommandsCompilerPassTest extends \PHPUnit_Framework_TestCas
         $container->addDefinitions([
             'form.type' => (new Definition())
                     ->setClass('Expected\FormType')
-                    ->addTag('form.type')
+                    ->addTag('form.type', ['alias' => 'command_form_type'])
                     ->addTag(RegisterConsoleCommandsCompilerPass::TAG, [
                         'command' => 'Vendor\Domain\Application\Commands\ExampleCommand',
                         'alias' => 'example-command',
@@ -48,8 +48,42 @@ class RegisterConsoleCommandsCompilerPassTest extends \PHPUnit_Framework_TestCas
             $consoleCommandDefinition->getArgument(1)
         );
 
+        $this->assertEquals(
+            'command_form_type',
+            $consoleCommandDefinition->getArgument(2)
+        );
+
         $this->assertTrue(
             $consoleCommandDefinition->hasTag('console.command')
+        );
+    }
+
+    /** @test */
+    public function it_adds_console_command_definition_without_form_alias()
+    {
+        $container = new ContainerBuilder();
+        $container->addCompilerPass(new RegisterConsoleCommandsCompilerPass());
+
+        $container->addDefinitions([
+            'form.type' => (new Definition())
+                ->setClass('Expected\FormType')
+                ->addTag('form.type')
+                ->addTag(RegisterConsoleCommandsCompilerPass::TAG, [
+                        'command' => 'Vendor\Domain\Application\Commands\ExampleCommand',
+                        'alias' => 'example-command',
+                    ]
+                ),
+        ]);
+
+        $container->compile();
+
+        $this->assertTrue($container->has('command_bus_console.example_command'));
+
+        /** @var Definition $consoleCommandDefinition */
+        $consoleCommandDefinition = $container->getDefinition('command_bus_console.example_command');
+
+        $this->assertNull(
+            $consoleCommandDefinition->getArgument(2)
         );
     }
 
@@ -67,7 +101,7 @@ class RegisterConsoleCommandsCompilerPassTest extends \PHPUnit_Framework_TestCas
         $container->addDefinitions([
             'form.type' => (new Definition())
                 ->setClass('Expected\FormType')
-                ->addTag('form.type')
+                ->addTag('form.type', ['alias' => 'command_form_type'])
                 ->addTag(RegisterConsoleCommandsCompilerPass::TAG, [
                         'command' => 'Vendor\Domain\Application\Commands\ExampleCommand',
                         'alias' => 'example-command',
@@ -121,7 +155,7 @@ class RegisterConsoleCommandsCompilerPassTest extends \PHPUnit_Framework_TestCas
         $container->addDefinitions([
             'form.type' => (new Definition())
                 ->setClass('Expected\FormType')
-                ->addTag('form.type')
+                ->addTag('form.type', ['alias' => 'command_form_type'])
                 ->addTag(RegisterConsoleCommandsCompilerPass::TAG, [
                         'alias' => 'example-command',
                     ]
@@ -145,7 +179,7 @@ class RegisterConsoleCommandsCompilerPassTest extends \PHPUnit_Framework_TestCas
         $container->addDefinitions([
             'form.type' => (new Definition())
                 ->setClass('Expected\FormType')
-                ->addTag('form.type')
+                ->addTag('form.type', ['alias' => 'command_form_type'])
                 ->addTag(RegisterConsoleCommandsCompilerPass::TAG, [
                         'command' => 'Vendor\Domain\Application\Commands\ExampleCommand',
                     ]

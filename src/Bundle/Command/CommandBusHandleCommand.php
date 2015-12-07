@@ -2,6 +2,7 @@
 
 namespace Clearcode\CommandBusConsole\Bundle\Command;
 
+use Clearcode\CommandBusConsole\Bundle\LegacyFormHelper;
 use Matthias\SymfonyConsoleForm\Console\Command\InteractiveFormContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -17,10 +18,19 @@ class CommandBusHandleCommand extends InteractiveFormContainerAwareCommand
     /** @var string */
     private $formType;
 
-    public function __construct($alias, $formType)
+    /** @var string */
+    private $legacyFormTypeAlias;
+
+    /**
+     * @param string $alias
+     * @param string $formType
+     * @param string $legacyFormTypeAlias
+     */
+    public function __construct($alias, $formType, $legacyFormTypeAlias)
     {
         $this->alias = $alias;
         $this->formType = $formType;
+        $this->legacyFormTypeAlias = $legacyFormTypeAlias;
 
         parent::__construct();
     }
@@ -28,7 +38,7 @@ class CommandBusHandleCommand extends InteractiveFormContainerAwareCommand
     /** {@inheritdoc} */
     public function formType()
     {
-        return $this->formType;
+        return LegacyFormHelper::getType($this->formType, $this->legacyFormTypeAlias);
     }
 
     /** {@inheritdoc} */
