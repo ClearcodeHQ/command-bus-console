@@ -6,10 +6,10 @@ use Assert\Assertion;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Gherkin\Node\PyStringNode;
-use Clearcode\CommandBusConsole\Bundle\Command\CommandBusHandleCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
-use tests\Clearcode\CommandBusConsole\Bundle\App\TestKernel;
+use tests\Clearcode\CommandBusConsole\TestKernel;
 use tests\Clearcode\CommandBusConsole\Helper\ApplicationTester;
+use tests\Clearcode\CommandBusConsole\Helper\StringUtil;
 
 class CLIContext implements Context, SnippetAcceptingContext
 {
@@ -19,18 +19,28 @@ class CLIContext implements Context, SnippetAcceptingContext
     {
         $kernel = new TestKernel('test', false);
         $app = new Application($kernel);
-
-        $app->add(new CommandBusHandleCommand());
-
         $this->tester = new ApplicationTester($app);
     }
 
     /**
+     * @param string $command
+     *
      * @When I run command :command
      */
     public function iRunCommand($command)
     {
-        $this->tester->run($command);
+        $this->runCommandWithNonInteractiveInput($command);
+    }
+
+    /**
+     * @param string       $command
+     * @param PyStringNode $input
+     *
+     * @When I run command :command and provide as input
+     */
+    public function iRunCommandAndProvideAsInput($command, PyStringNode $input)
+    {
+        $this->runCommandWithInteractiveInput($command, $input);
     }
 
     /**
@@ -38,7 +48,7 @@ class CLIContext implements Context, SnippetAcceptingContext
      */
     public function commandShouldEndSuccessfully()
     {
-        Assertion::same($this->tester->getExitCode(), 0);
+        Assertion::same($this->tester->getStatusCode(), 0);
     }
 
     /**
@@ -46,7 +56,7 @@ class CLIContext implements Context, SnippetAcceptingContext
      */
     public function commandShouldEndUnsuccessfully()
     {
-        Assertion::notSame($this->tester->getExitCode(), 0);
+        Assertion::notSame($this->tester->getStatusCode(), 0);
     }
 
     /**
@@ -56,6 +66,33 @@ class CLIContext implements Context, SnippetAcceptingContext
      */
     public function theOutputShouldBe(PyStringNode $expectedOutput)
     {
-        Assertion::same($this->tester->getOutputAsString(), (string) $expectedOutput);
+        Assertion::same(StringUtil::removeEmptyLines($this->getOutput()), (string) $expectedOutput);
+    }
+
+    /**
+     * @param PyStringNode $expectedOutput
+     *
+     * @When the output should contain
+     */
+    public function theOutputShouldContain(PyStringNode $expectedOutput)
+    {
+        Assertion::contains(StringUtil::removeEmptyLines($this->getOutput()), (string) $expectedOutput);
+    }
+
+    private function runCommandWithNonInteractiveInput($command)
+    {
+        $this->tester->run($command, array('interactive' => false, 'decorated' => false));
+    }
+
+    private function runCommandWithInteractiveInput($command, $input)
+    {
+        $input = str_replace('[enter]', "\n", $input);
+        $this->tester->putToInputStream($input);
+        $this->tester->run($command, array('interactive' => true, 'decorated' => false));
+    }
+
+    private function getOutput()
+    {
+        return $this->tester->getDisplay(true);
     }
 }

@@ -1,8 +1,9 @@
 <?php
 
-namespace tests\Clearcode\CommandBusConsole\Bundle\App;
+namespace tests\Clearcode\CommandBusConsole;
 
 use Clearcode\CommandBusConsole\Bundle\CommandBusConsoleBundle;
+use Matthias\SymfonyConsoleForm\Bundle\SymfonyConsoleFormBundle;
 use SimpleBus\SymfonyBridge\SimpleBusCommandBusBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -16,6 +17,7 @@ class TestKernel extends Kernel
         return [
             new FrameworkBundle(),
             new SimpleBusCommandBusBundle(),
+            new SymfonyConsoleFormBundle(),
             new CommandBusConsoleBundle(),
         ];
     }

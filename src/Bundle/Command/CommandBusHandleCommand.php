@@ -2,48 +2,63 @@
 
 namespace Clearcode\CommandBusConsole\Bundle\Command;
 
-use Clearcode\CommandBusConsole\CommandConsoleException;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputArgument;
+use Clearcode\CommandBusConsole\Bundle\LegacyFormHelper;
+use Matthias\SymfonyConsoleForm\Console\Command\InteractiveFormContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CommandBusHandleCommand extends ContainerAwareCommand
+class CommandBusHandleCommand extends InteractiveFormContainerAwareCommand
 {
     const SUCCESS_CODE = 0;
     const ERROR_CODE = 1;
 
+    /** @var string */
+    private $alias;
+
+    /** @var string */
+    private $formType;
+
+    /** @var string */
+    private $legacyFormTypeAlias;
+
+    /**
+     * @param string $alias
+     * @param string $formType
+     * @param string $legacyFormTypeAlias
+     */
+    public function __construct($alias, $formType, $legacyFormTypeAlias)
+    {
+        $this->alias = $alias;
+        $this->formType = $formType;
+        $this->legacyFormTypeAlias = $legacyFormTypeAlias;
+
+        parent::__construct();
+    }
+
+    /** {@inheritdoc} */
+    public function formType()
+    {
+        return LegacyFormHelper::getType($this->formType, $this->legacyFormTypeAlias);
+    }
+
+    /** {@inheritdoc} */
     protected function configure()
     {
         $this
-            ->setName('command-bus:handle')
-            ->setDescription('CLI for command bus.')
-            ->addArgument('commandName', InputArgument::REQUIRED)
-            ->addArgument('arguments', InputArgument::IS_ARRAY);
+            ->setName(sprintf('command-bus:%s', $this->alias))
+        ;
     }
 
     /** {@inheritdoc} */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $commandLauncher = $this->getContainer()->get('command_bus_console.command_launcher');
-
-        $commandToLunch = $input->getArgument('commandName');
-        $arguments = $input->getArgument('arguments');
-
-        $arguments = $this->parseNamedArguments($arguments);
-
         try {
-            $command = $commandLauncher->getCommandToLaunch($commandToLunch, $arguments);
-        } catch (CommandConsoleException $e) {
-            return $this->handleException($output, $e);
-        }
-        try {
-            $this->getContainer()->get('command_bus')->handle($command);
+            $this->getContainer()->get('command_bus')->handle($this->formData());
         } catch (\Exception $e) {
             return $this->handleException($output, $e);
         }
 
-        return $this->handleSuccess($output, $commandToLunch);
+        return $this->handleSuccess($output, get_class($this->formData()));
     }
 
     private function handleException(OutputInterface $output, \Exception $exception)
@@ -58,24 +73,5 @@ class CommandBusHandleCommand extends ContainerAwareCommand
         $output->writeln(sprintf('The <info>%s</info> executed with success.', $commandToLunch));
 
         return self::SUCCESS_CODE;
-    }
-
-    /**
-     * @param string[] $arguments
-     *
-     * @return string[]
-     */
-    protected function parseNamedArguments(array $arguments)
-    {
-        foreach ($arguments as $key => $argument) {
-            if (strpos($argument, '=')) {
-                list($arg, $value) = explode('=', $argument);
-
-                unset($arguments[$key]);
-                $arguments[$arg] = $value;
-            }
-        }
-
-        return $arguments;
     }
 }
