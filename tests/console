@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-use tests\Clearcode\CommandBusConsole\Bundle\App\TestKernel;
+use tests\Clearcode\CommandBusConsole\TestKernel;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Debug\Debug;

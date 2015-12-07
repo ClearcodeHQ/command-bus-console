@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\Clearcode\CommandBusConsole\Bundle\App;
+namespace tests\Clearcode\CommandBusConsole;
 
 use Clearcode\CommandBusConsole\Bundle\CommandBusConsoleBundle;
 use Matthias\SymfonyConsoleForm\Bundle\SymfonyConsoleFormBundle;

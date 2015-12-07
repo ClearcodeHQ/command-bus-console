@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\Clearcode\CommandBusConsole\Bundle\DependencyInjection\Compiler;
+namespace tests\unit\Clearcode\CommandBusConsole\Bundle\DependencyInjection\Compiler;
 
 use Clearcode\CommandBusConsole\Bundle\Command\CommandBusHandleCommand;
 use Clearcode\CommandBusConsole\Bundle\DependencyInjection\Compiler\RegisterConsoleCommandsCompilerPass;
@@ -28,10 +28,10 @@ class RegisterConsoleCommandsCompilerPassTest extends \PHPUnit_Framework_TestCas
 
         $container->compile();
 
-        $this->assertTrue($container->has('command_bus_console.example-command'));
+        $this->assertTrue($container->has('command_bus_console.example_command'));
 
         /** @var Definition $consoleCommandDefinition */
-        $consoleCommandDefinition = $container->getDefinition('command_bus_console.example-command');
+        $consoleCommandDefinition = $container->getDefinition('command_bus_console.example_command');
 
         $this->assertEquals(
             CommandBusHandleCommand::class,

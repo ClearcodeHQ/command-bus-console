@@ -24,7 +24,7 @@ class RegisterConsoleCommandsCompilerPass implements CompilerPassInterface
             $this->assertTagsRequiredAttribute($formTypeTagAttributes[0], $formTypeId);
 
             $container->setDefinition(
-                sprintf('command_bus_console.%s', $formTypeTagAttributes[0]['alias']),
+                sprintf('command_bus_console.%s', str_replace('-', '_', $formTypeTagAttributes[0]['alias'])),
                 (new Definition())
                     ->setClass(CommandBusHandleCommand::class)
                     ->addArgument($formTypeTagAttributes[0]['alias'])
