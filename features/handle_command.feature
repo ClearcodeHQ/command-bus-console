@@ -13,6 +13,7 @@ Feature: Handle command
     Then command should end unsuccessfully
      And the output should be
           """
+          The tests\Clearcode\CommandBusConsole\CommandBus\UnsuccessfulCommand failed to execute
           Unsuccessful command execution.
           """
 

@@ -67,8 +67,6 @@ class CommandBusHandleCommand extends InteractiveFormContainerAwareCommand
 
         $output->writeln(sprintf('<error>The %s failed to execute</error>', get_class($command)));
 
-        $output->writeln("<error>Given parameters: </error>");
-
         foreach (get_object_vars($command) as $propertyName => $propertyValue) {
             $output->writeln(sprintf('<error>%s => %s</error>', $propertyName, $propertyValue));
         }
