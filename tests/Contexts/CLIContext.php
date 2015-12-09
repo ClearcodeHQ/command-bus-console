@@ -66,7 +66,6 @@ class CLIContext implements Context, SnippetAcceptingContext
      */
     public function theOutputShouldBe(PyStringNode $expectedOutput)
     {
-        dump($this->getOutput());
         Assertion::same(StringUtil::removeEmptyLines($this->getOutput()), (string) $expectedOutput);
     }
 
