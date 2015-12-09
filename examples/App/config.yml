@@ -6,10 +6,15 @@ framework:
     test: ~
     secret: %secret%
     form: ~
-    validation: ~
 
-#services:
-#    dummy_command:
-#        class: tests\Clearcode\CommandBusConsole\Bundle\Mocks\DummyCommandHandler
-#        tags:
-#            - { name: command_handler, handles: tests\Clearcode\CommandBusConsole\Bundle\Mocks\DummyCommand }
+services:
+    sign_up_handler:
+        class: examples\Clearcode\CommandBusConsole\Application\SignUpHandler
+        tags:
+            - { name: command_handler, handles: examples\Clearcode\CommandBusConsole\Application\SignUp }
+
+    sign_up_form_type:
+        class: examples\Clearcode\CommandBusConsole\Form\SignUpType
+        tags:
+            - { name: form.type, alias: sign_up }
+            - { name: command_bus.type, command: examples\Clearcode\CommandBusConsole\Application\SignUp, alias: sign-up }
