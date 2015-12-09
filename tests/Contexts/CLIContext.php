@@ -24,16 +24,20 @@ class CLIContext implements Context, SnippetAcceptingContext
     }
 
     /**
+     * @Given current time is :date
+     */
+    public function currentTimeIs($date)
+    {
+        Carbon::setTestNow(new Carbon($date));
+    }
+
+    /**
      * @param string $command
      *
-     * @When I run command :command on :date
      * @When I run command :command
      */
-    public function iRunCommand($command, $date = null)
+    public function iRunCommand($command)
     {
-        $testNow = $date ? new Carbon($date) : Carbon::now();
-        Carbon::setTestNow($testNow);
-
         $this->runCommandWithNonInteractiveInput($command);
     }
 

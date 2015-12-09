@@ -84,12 +84,12 @@ class CommandBusHandleCommand extends InteractiveFormContainerAwareCommand
 
     private function getArgumentsString($command)
     {
-        $argumentsString = "";
+        $argumentStrings = [];
 
         foreach (get_object_vars($command) as $propertyName => $propertyValue) {
-            $argumentsString .= $propertyName . " => '" . $propertyValue . "', ";
+            $argumentStrings[] = sprintf('%s=>"%s"', $propertyName, $propertyValue);
         }
 
-        return substr($argumentsString, 0, -2);
+        return implode(', ', $argumentStrings);
     }
 }

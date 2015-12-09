@@ -1,7 +1,10 @@
 Feature: Handle command
 
+  Background:
+    Given current time is "2015-12-09 11:00:59"
+
   Scenario: Successfully handle command
-    When I run command "command-bus:successful-command --no-interaction" on "2015-12-09 11:00:59"
+    When I run command "command-bus:successful-command --no-interaction"
     Then command should end successfully
      And the output should be
           """
@@ -9,7 +12,7 @@ Feature: Handle command
           """
 
   Scenario: Unsuccessfully handle command
-    When I run command "command-bus:unsuccessful-command --no-interaction" on "2015-12-09 11:00:59"
+    When I run command "command-bus:unsuccessful-command --no-interaction"
     Then command should end unsuccessfully
      And the output should be
           """
@@ -17,7 +20,7 @@ Feature: Handle command
           """
 
   Scenario: Successfully handle command with argument
-    When I run command "command-bus:command-with-argument --no-interaction --id=1234" on "2015-12-09 11:00:59"
+    When I run command "command-bus:command-with-argument --no-interaction --id=1234"
     Then command should end successfully
      And the output should be
           """
