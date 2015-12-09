@@ -1,28 +1,27 @@
 Feature: Handle command
 
   Scenario: Successfully handle command
-    When I run command "command-bus:successful-command --no-interaction"
+    When I run command "command-bus:successful-command --no-interaction" on "2015-12-09 11:00:59"
     Then command should end successfully
      And the output should be
           """
-          The tests\Clearcode\CommandBusConsole\CommandBus\SuccessfulCommand executed with success.
+          [2015-12-09 11:00:59] The tests\Clearcode\CommandBusConsole\CommandBus\SuccessfulCommand executed with success.
           """
 
   Scenario: Unsuccessfully handle command
-    When I run command "command-bus:unsuccessful-command --no-interaction"
+    When I run command "command-bus:unsuccessful-command --no-interaction" on "2015-12-09 11:00:59"
     Then command should end unsuccessfully
      And the output should be
           """
-          The tests\Clearcode\CommandBusConsole\CommandBus\UnsuccessfulCommand failed to execute
-          Unsuccessful command execution.
+          [2015-12-09 11:00:59] The command "tests\Clearcode\CommandBusConsole\CommandBus\UnsuccessfulCommand" with arguments [] has failed to execute. Exception "DomainException" was thrown with message: "Unsuccessful command execution."
           """
 
   Scenario: Successfully handle command with argument
-    When I run command "command-bus:command-with-argument --no-interaction --id=1234"
+    When I run command "command-bus:command-with-argument --no-interaction --id=1234" on "2015-12-09 11:00:59"
     Then command should end successfully
      And the output should be
           """
-          The tests\Clearcode\CommandBusConsole\CommandBus\CommandWithArgument executed with success.
+          [2015-12-09 11:00:59] The tests\Clearcode\CommandBusConsole\CommandBus\CommandWithArgument executed with success.
           """
 
   Scenario: Unsuccessfully handle command with argument if argument is missing

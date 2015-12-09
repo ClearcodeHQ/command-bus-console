@@ -6,6 +6,7 @@ use Assert\Assertion;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Gherkin\Node\PyStringNode;
+use Carbon\Carbon;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use tests\Clearcode\CommandBusConsole\TestKernel;
 use tests\Clearcode\CommandBusConsole\Helper\ApplicationTester;
@@ -25,10 +26,14 @@ class CLIContext implements Context, SnippetAcceptingContext
     /**
      * @param string $command
      *
+     * @When I run command :command on :date
      * @When I run command :command
      */
-    public function iRunCommand($command)
+    public function iRunCommand($command, $date = null)
     {
+        $testNow = $date ? new Carbon($date) : Carbon::now();
+        Carbon::setTestNow($testNow);
+
         $this->runCommandWithNonInteractiveInput($command);
     }
 
