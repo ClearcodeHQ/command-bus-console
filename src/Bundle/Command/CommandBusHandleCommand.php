@@ -6,6 +6,7 @@ use Clearcode\CommandBusConsole\Bundle\LegacyFormHelper;
 use Matthias\SymfonyConsoleForm\Console\Command\InteractiveFormContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Carbon\Carbon;
 
 class CommandBusHandleCommand extends InteractiveFormContainerAwareCommand
 {
@@ -63,15 +64,32 @@ class CommandBusHandleCommand extends InteractiveFormContainerAwareCommand
 
     private function handleException(OutputInterface $output, \Exception $exception)
     {
-        $output->writeln(sprintf('<error>%s</error>', $exception->getMessage()));
+        $command = $this->formData();
+        $arguments = $this->getArgumentsString($command);
+
+        $output->writeln(sprintf(
+            '<error>[%s] The command "%s" with arguments [%s] has failed to execute. Exception "%s" was thrown with message: "%s"</error>',
+            Carbon::now(), get_class($command), $arguments, get_class($exception), $exception->getMessage()
+        ));
 
         return self::ERROR_CODE;
     }
 
     private function handleSuccess(OutputInterface $output, $commandToLunch)
     {
-        $output->writeln(sprintf('The <info>%s</info> executed with success.', $commandToLunch));
+        $output->writeln(sprintf('[%s] The <info>%s</info> executed with success.', Carbon::now(), $commandToLunch));
 
         return self::SUCCESS_CODE;
+    }
+
+    private function getArgumentsString($command)
+    {
+        $argumentStrings = [];
+
+        foreach (get_object_vars($command) as $propertyName => $propertyValue) {
+            $argumentStrings[] = sprintf('%s=>"%s"', $propertyName, $propertyValue);
+        }
+
+        return implode(', ', $argumentStrings);
     }
 }

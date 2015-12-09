@@ -15,7 +15,8 @@
         "simple-bus/symfony-bridge": "^4.1",
         "ramsey/uuid": "~3.0",
         "symfony/yaml": "~2.5",
-        "matthiasnoback/symfony-console-form": "^1.2"
+        "matthiasnoback/symfony-console-form": "^1.2",
+        "nesbot/carbon": "^1.21"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",

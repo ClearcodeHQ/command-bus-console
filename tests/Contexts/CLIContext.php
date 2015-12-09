@@ -6,6 +6,7 @@ use Assert\Assertion;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Gherkin\Node\PyStringNode;
+use Carbon\Carbon;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use tests\Clearcode\CommandBusConsole\TestKernel;
 use tests\Clearcode\CommandBusConsole\Helper\ApplicationTester;
@@ -20,6 +21,14 @@ class CLIContext implements Context, SnippetAcceptingContext
         $kernel = new TestKernel('test', false);
         $app = new Application($kernel);
         $this->tester = new ApplicationTester($app);
+    }
+
+    /**
+     * @Given current time is :date
+     */
+    public function currentTimeIs($date)
+    {
+        Carbon::setTestNow(new Carbon($date));
     }
 
     /**
