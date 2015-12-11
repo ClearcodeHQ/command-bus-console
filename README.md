@@ -85,7 +85,7 @@ Id:
 Name:
 email:
 
-The Fully\Qualified\Class\Name\Of\SignUp executed with success.
+[2015-12-11 10:34:55] The Fully\Qualified\Class\Name\Of\SignUp executed with success.
 ```
 
 ## Run command in non interactive mode
@@ -93,7 +93,7 @@ The Fully\Qualified\Class\Name\Of\SignUp executed with success.
 ```console
 $ bin/console command-bus:alias-for-command --no-interaction --id=1 --name=John --email=john@doe.com
 
-The Fully\Qualified\Class\Name\Of\SignUp executed with success.
+[2015-12-11 10:34:55] The Fully\Qualified\Class\Name\Of\SignUp executed with success.
 ```
 
 # To Do
