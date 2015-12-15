@@ -25,7 +25,8 @@
         "symfony/validator": "~2.5",
         "symfony/var-dumper": "~2.5",
         "symfony/class-loader": "~2.1",
-        "behat/behat": "^3.0"
+        "behat/behat": "^3.0",
+        "symfony/phpunit-bridge": "^3.0"
     },
     "autoload": {
         "psr-4" : { "Clearcode\\CommandBusConsole\\": "src" }
